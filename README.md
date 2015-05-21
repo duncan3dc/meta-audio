@@ -17,6 +17,23 @@ $ composer require duncan3dc/meta-audio
 ```
 
 
+## Quick Example
+```php
+$tagger = new \duncan3dc\MetaAudio\Tagger;
+$tagger->addDefaultModules();
+
+$mp3 = $tagger->open("/var/music/song.mp3");
+
+$mp3->getArtist();
+$mp3->getAlbum();
+$mp3->getYear();
+$mp3->getNumber();
+$mp3->getTitle();
+```
+
+_Read more at http://duncan3dc.github.io/meta-audio/_  
+
+
 ## Changelog
 A [Changelog](CHANGELOG.md) has been available since the beginning of time
 
