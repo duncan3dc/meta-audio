@@ -1,0 +1,27 @@
+{
+    "name": "duncan3dc/meta-audio",
+    "type": "library",
+    "description": "A library to read and write metadata tags to audio files",
+    "keywords": ["mpg", "id3", "id3v1", "id3v2", "apetag", "apev1", "apev2", "audio", "metadata"],
+    "homepage": "https://github.com/duncan3dc/meta-audio",
+    "license": "Apache-2.0",
+    "authors": [{
+        "name": "Craig Duncan",
+        "email": "git@duncanc.co.uk",
+        "homepage": "https://github.com/duncan3dc",
+        "role": "Developer"
+    }],
+    "require": {
+        "php": ">=5.6.0"
+    },
+    "require-dev": {
+        "mockery/mockery": "^0.9.4",
+        "phpunit/phpunit": "^4.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "duncan3dc\\MetaAudio\\": "src/",
+            "duncan3dc\\MetaAudio\\Test\\": "tests/"
+        }
+    }
+}
