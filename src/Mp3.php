@@ -40,6 +40,7 @@ class Mp3
     protected function getModuleString($method)
     {
         foreach ($this->modules as $module) {
+            $module->open($this->file);
             $result = $module->$method();
             if (is_string($result) && strlen($result) > 0) {
                 return $result;
@@ -62,6 +63,7 @@ class Mp3
     protected function getModuleInt($method)
     {
         foreach ($this->modules as $module) {
+            $module->open($this->file);
             $result = $module->$method();
             if (is_numeric($result) && $result > 0) {
                 return (int) $result;
