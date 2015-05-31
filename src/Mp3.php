@@ -10,7 +10,7 @@ class Mp3
     use ModuleManager;
 
     /**
-     * @var \SplFileObject $file The file handler.
+     * @var File $file The file handler.
      */
     protected $file;
 
@@ -18,11 +18,11 @@ class Mp3
     /**
      * Create a new instance from a local file.
      *
-     * @param \SplFileObject $filename The file to work with
+     * @param File $file The file to work with
      *
      * @return static
      */
-    public function __construct(\SplFileObject $file)
+    public function __construct(File $file)
     {
         $this->file = $file;
     }

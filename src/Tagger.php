@@ -18,7 +18,7 @@ class Tagger
      */
     public function open($filename)
     {
-        $file = new \SplFileObject($filename, "r+");
+        $file = new File($filename);
         $mp3 = new Mp3($file);
 
         foreach ($this->modules as $module) {

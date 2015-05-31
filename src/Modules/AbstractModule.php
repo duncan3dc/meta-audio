@@ -2,6 +2,8 @@
 
 namespace duncan3dc\MetaAudio\Modules;
 
+use duncan3dc\MetaAudio\File;
+
 /**
  * Base class for modules to extend
  */
@@ -13,7 +15,7 @@ abstract class AbstractModule implements ModuleInterface
     protected $tags;
 
     /**
-     * @var SplFileObject $file The file to read.
+     * @var File $file The file to read.
      */
     protected $file;
 
@@ -21,11 +23,11 @@ abstract class AbstractModule implements ModuleInterface
     /**
      * Load the passed file.
      *
-     * @param SplFileObject $file The file to read
+     * @param File $file The file to read
      *
      * @return static
      */
-    public function open(\SplFileObject $file)
+    public function open(File $file)
     {
         # If this file is already loaded then don't do anything
         if ($this->file) {
