@@ -3,6 +3,7 @@
 namespace duncan3dc\MetaAudioTests\Modules;
 
 use duncan3dc\MetaAudio\File;
+use duncan3dc\ObjectIntruder\Intruder;
 
 class AbstractModuleTest extends \PHPUnit_Framework_TestCase
 {
@@ -10,19 +11,18 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->module = new AbstractModule;
-        $this->module->setTags([
+        $module = new AbstractModule;
+        $module->putTags([
             "artist"    =>  "lagwagon",
         ]);
+
+        $this->module = new Intruder($module);
     }
 
 
-    private function setCachedTags(array $tags)
+    public function tearDown()
     {
-        $reflected = new \ReflectionClass($this->module);
-        $property = $reflected->getProperty("tags");
-        $property->setAccessible(true);
-        $property->setValue($this->module, $tags);
+        unset($this->module);
     }
 
 
@@ -32,9 +32,9 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
         $this->assertSame("lagwagon", $this->module->getArtist());
 
         # Ensure the cached data is being used
-        $this->setCachedTags([
+        $this->module->tags = [
             "artist"    =>  "no use for a name",
-        ]);
+        ];
         $this->assertSame("no use for a name", $this->module->getArtist());
 
         # When passing in a new file, ensure the cached data is discarded
@@ -53,9 +53,9 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
         $this->assertSame("lagwagon", $this->module->getArtist());
 
         # Ensure the cached data is being used
-        $this->setCachedTags([
+        $this->module->tags = [
             "artist"    =>  "no use for a name",
-        ]);
+        ];
         $this->assertSame("no use for a name", $this->module->getArtist());
 
         # Ensure when adding a different file the data is reloaded
@@ -76,9 +76,9 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
         $this->assertSame("lagwagon", $this->module->getArtist());
 
         # Ensure the cached data is being used
-        $this->setCachedTags([
+        $this->module->tags = [
             "artist"    =>  "no use for a name",
-        ]);
+        ];
         $this->assertSame("no use for a name", $this->module->getArtist());
 
         # Ensure when adding the same file the cache is retained
@@ -92,5 +92,28 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
     public function testInvalidTag()
     {
         $this->assertSame("", $this->module->getTitle());
+    }
+
+
+    public function test_save_writes_pending_changes()
+    {
+        $this->module->setTag("artist", "strung out");
+
+        # Nothing should be written to the file yet
+        $this->assertSame(["artist" => "lagwagon"], $this->module->testTags);
+
+        $this->module->save();
+
+        # Now the file should have been written to
+        $this->assertSame(["artist" => "strung out"], $this->module->testTags);
+
+        # Overwrite the cache data, so that we can be sure the file ISN'T written to again
+        $this->module->tags = [
+            "artist"    =>  "no use for a name",
+        ];
+
+        # The file should not have been written to again
+        $this->module->save();
+        $this->assertSame(["artist" => "strung out"], $this->module->testTags);
     }
 }

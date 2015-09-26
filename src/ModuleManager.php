@@ -10,7 +10,7 @@ use duncan3dc\MetaAudio\Modules\ModuleInterface;
 trait ModuleManager
 {
     /**
-     * @var ModuleInterface[] $modules The modules used to read tags.
+     * @var ModuleInterface[] $modules The modules used to read/write tags.
      */
     private $modules = [];
 

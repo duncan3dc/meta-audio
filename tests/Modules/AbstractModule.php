@@ -6,11 +6,6 @@ class AbstractModule extends \duncan3dc\MetaAudio\Modules\AbstractModule
 {
     private $testTags;
 
-    public function setTags(array $tags)
-    {
-        $this->testTags = $tags;
-    }
-
 
     protected function getTags()
     {
@@ -45,5 +40,41 @@ class AbstractModule extends \duncan3dc\MetaAudio\Modules\AbstractModule
     public function getYear()
     {
         return $this->getTag("year");
+    }
+
+
+    public function putTags(array $tags)
+    {
+        $this->testTags = $tags;
+    }
+
+
+    public function setTitle($title)
+    {
+        return $this->setTag("title", $title);
+    }
+
+
+    public function setTrackNumber($track)
+    {
+        return $this->setTag("track-number", $track);
+    }
+
+
+    public function setArtist($artist)
+    {
+        return $this->setTag("artist", $artist);
+    }
+
+
+    public function setAlbum($album)
+    {
+        return $this->setTag("album", $album);
+    }
+
+
+    public function setYear($year)
+    {
+        return $this->setTag("year", $year);
     }
 }

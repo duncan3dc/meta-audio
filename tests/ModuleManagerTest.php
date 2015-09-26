@@ -21,6 +21,7 @@ class ModuleManagerTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
+        unset($this->manager);
         Mockery::close();
     }
 

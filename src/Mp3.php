@@ -3,7 +3,7 @@
 namespace duncan3dc\MetaAudio;
 
 /**
- * Read tags from an mp3 file.
+ * Read/write tags from an mp3 file.
  */
 class Mp3
 {
@@ -12,7 +12,7 @@ class Mp3
     /**
      * @var File $file The file handler.
      */
-    protected $file;
+    private $file;
 
 
     /**
@@ -37,7 +37,7 @@ class Mp3
      *
      * @return string
      */
-    protected function getModuleString($method)
+    private function getModuleString($method)
     {
         foreach ($this->getModules() as $module) {
             $module->open($this->file);
@@ -60,7 +60,7 @@ class Mp3
      *
      * @return int
      */
-    protected function getModuleInt($method)
+    private function getModuleInt($method)
     {
         foreach ($this->getModules() as $module) {
             $module->open($this->file);
@@ -126,5 +126,86 @@ class Mp3
     public function getYear()
     {
         return $this->getModuleInt(__FUNCTION__);
+    }
+
+
+    /**
+     * Set a value using all active modules.
+     *
+     * @param string $method The method name to call on the modules
+     * @param mixed $value The value to pass to the module method
+     *
+     * @return static
+     */
+    private function setModuleValue($method, $value)
+    {
+        foreach ($this->modules as $module) {
+            $module->open($this->file);
+            $module->$method($value);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * Set the track title.
+     *
+     * @param string $title The title name
+     *
+     * @return static
+     */
+    public function setTitle($title)
+    {
+        return $this->setModuleValue(__FUNCTION__, (string) $title);
+    }
+
+    /**
+     * Set the track number.
+     *
+     * @param int $track The track number
+     *
+     * @return void
+     */
+    public function setTrackNumber($track)
+    {
+        return $this->setModuleValue(__FUNCTION__, (int) $track);
+    }
+
+
+    /**
+     * Set the artist name.
+     *
+     * @param string $artist The artist name
+     *
+     * @return void
+     */
+    public function setArtist($artist)
+    {
+        return $this->setModuleValue(__FUNCTION__, (string) $artist);
+    }
+
+    /**
+     * Set the album name.
+     *
+     * @param string $album The album name
+     *
+     * @return void
+     */
+    public function setAlbum($album)
+    {
+        return $this->setModuleValue(__FUNCTION__, (string) $album);
+    }
+
+    /**
+     * Set the release year.
+     *
+     * @param int $year The release year
+     *
+     * @return void
+     */
+    public function setYear($year)
+    {
+        return $this->setModuleValue(__FUNCTION__, (int) $year);
     }
 }

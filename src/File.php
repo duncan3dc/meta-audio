@@ -12,6 +12,17 @@ class File extends \SplFileObject
     const BUFFER_SIZE = 32768;
 
     /**
+     * Create a new file object.
+     *
+     * @param string $filename The filename to open
+     */
+    public function __construct($filename)
+    {
+        parent::__construct($filename, "r+");
+    }
+
+
+    /**
      * Process the remainder of the file from the current position through the callback.
      *
      * @param callable $func A function that takes a single string parameter (which will contain each chunk of the file read)
