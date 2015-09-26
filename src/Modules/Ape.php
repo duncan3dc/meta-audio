@@ -19,7 +19,7 @@ class Ape extends AbstractModule
     {
         $this->file->fseek(0, \SEEK_SET);
         $position = $this->file->getStringPosition("APETAGEX");
-        $this->file->fseek($position);
+        $this->file->fseek($position, \SEEK_CUR);
 
         $header = $this->parseHeader();
 

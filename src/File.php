@@ -40,7 +40,9 @@ class File extends \SplFileObject
     {
         $stringPosition = false;
 
-        $this->readCallback(function($data) use(&$stringPosition, $string) {
+        $startingPosition = $this->ftell();
+
+        $this->readCallback(function ($data) use (&$stringPosition, $string, $startingPosition) {
 
             $position = strpos($data, $string);
             if ($position === false) {
@@ -51,8 +53,12 @@ class File extends \SplFileObject
                 return;
             }
 
-            $stringPosition = $this->ftell() - strlen($data) + $position;
+            # Calculate the position of the string as an offset of the starting position
+            $stringPosition = $this->ftell() - $startingPosition - strlen($data) + $position;
         });
+
+        # Position back to where we were before finding the string
+        $this->fseek($startingPosition, \SEEK_SET);
 
         return $stringPosition;
     }
