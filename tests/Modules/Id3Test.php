@@ -4,6 +4,7 @@ namespace duncan3dc\MetaAudioTests\Modules;
 
 use duncan3dc\MetaAudio\File;
 use duncan3dc\MetaAudio\Modules\Id3;
+use duncan3dc\ObjectIntruder\Intruder;
 
 class Id3Test extends \PHPUnit_Framework_TestCase
 {
@@ -44,5 +45,29 @@ class Id3Test extends \PHPUnit_Framework_TestCase
     public function testGetYear()
     {
         $this->assertSame(2016, $this->module->getYear());
+    }
+
+
+    public function synchsafeProvider()
+    {
+        $numbers = [0, 1, 9999];
+        for ($i = 0; $i <= 99; $i++) {
+            $numbers[] = rand(2, 9998);
+        }
+        foreach ($numbers as $number) {
+            yield [$number];
+        }
+    }
+    /**
+     * @dataProvider synchsafeProvider
+     */
+    public function testSynchsafeConversion($input)
+    {
+        $module = new Intruder($this->module);
+
+        $string = $module->toSynchsafeInt($input);
+        $result = $module->fromSynchsafeInt($string);
+
+        $this->assertSame($input, $result);
     }
 }

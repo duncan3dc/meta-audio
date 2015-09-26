@@ -12,17 +12,17 @@ abstract class AbstractModule implements ModuleInterface
     /**
      * @var array|null $tags The parsed tags from the file.
      */
-    protected $tags;
+    private $tags;
+
+    /**
+     * @var bool $saveChanges Whether changes have been made that need to be saved.
+     */
+    private $saveChanges;
 
     /**
      * @var File $file The file to read.
      */
     protected $file;
-
-    /**
-     * @var bool $saveChanges Whether changes have been made that need to be saved.
-     */
-    protected $saveChanges;
 
 
     /**
