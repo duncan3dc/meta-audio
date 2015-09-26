@@ -21,7 +21,7 @@
     "autoload": {
         "psr-4": {
             "duncan3dc\\MetaAudio\\": "src/",
-            "duncan3dc\\MetaAudio\\Test\\": "tests/"
+            "duncan3dc\\MetaAudioTests\\": "tests/"
         }
     }
 }
