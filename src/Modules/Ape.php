@@ -10,6 +10,7 @@ use duncan3dc\MetaAudio\Exceptions\BadMethodCallException;
  */
 class Ape extends AbstractModule
 {
+    const PREAMBLE = "APETAGEX";
 
     /**
      * Get all the tags from the currently loaded file.
@@ -22,7 +23,7 @@ class Ape extends AbstractModule
 
         # Loop until we find a valid set of tags.
         while (true) {
-            $position = $this->file->getPreviousPosition("APETAGEX");
+            $position = $this->file->getPreviousPosition(self::PREAMBLE);
 
             # It looks like there aren't any parsable ape tags in the file
             if ($position === false) {
@@ -78,8 +79,8 @@ class Ape extends AbstractModule
     private function parseHeader()
     {
         $preamble = $this->file->fread(8);
-        if ($preamble !== "APETAGEX") {
-            throw new BadMethodCallException("Invalid Ape tag, expected [APETAGEX], got [{$preamble}]");
+        if ($preamble !== self::PREAMBLE) {
+            throw new BadMethodCallException("Invalid Ape tag, expected [" . self::PREAMBLE . "], got [{$preamble}]");
         }
 
         $version = unpack("L", $this->read(4))[1];
@@ -92,7 +93,7 @@ class Ape extends AbstractModule
             "size"      =>  $size,
             "items"     =>  $items,
             "flags"     =>  $flags,
-            "footer"    =>  !($flags & 0x20000000),
+            "footer"    =>  !($flags & 0x20),
         ];
 
         # Skip the empty space at the end of the header
@@ -167,6 +168,110 @@ class Ape extends AbstractModule
 
 
     /**
+     * Write the specified tags to the currently loaded file.
+     *
+     * @param array The tags to write as key/value pairs
+     *
+     * @return void
+     */
+    protected function putTags(array $tags)
+    {
+        # Get the contents of the file (without the ape tags)
+        $contents = "";
+        $this->file->rewind();
+        while (true) {
+            $start = $this->file->getNextPosition(self::PREAMBLE);
+            if ($start === false) {
+                break;
+            }
+
+            /**
+             * Remember where we currently are in the file,
+             * as we're about to start moving around.
+             */
+            $current = $this->file->ftell();
+
+            # Convert the start from a relative position to a literal
+            $start = $current + $start;
+
+            # Position to the ape tag and read in the header
+            $this->file->fseek($start, \SEEK_SET);
+            $header = $this->parseHeader();
+
+            # If this is a footer then find the tag's actual start position
+            if ($header["footer"]) {
+                $start -= $header["size"];
+                $end = $this->file->ftell();
+            } else {
+                $end = $current + $header["size"];
+            }
+
+            # Jump back to where we last read to
+            $this->file->fseek($current, \SEEK_SET);
+
+            # Get any content before the ape tag
+            if ($start > $current) {
+                $contents .= $this->file->fread($start - $current);
+            }
+
+            # Seek passed the ape tag we found
+            $this->file->fseek($end, \SEEK_SET);
+        }
+
+        # Read the rest of the file (following the last ape tag)
+        $contents .= $this->file->readAll();
+
+        # Generate the new ape tags
+        $tags = $this->createTagData($tags);
+
+        # Empty the file and position at the start so we can overwrite
+        $this->file->ftruncate(0);
+        $this->file->rewind();
+
+        $this->file->fwrite($contents);
+        $this->file->fwrite($tags);
+    }
+
+
+    /**
+     * Create the header for the file.
+     *
+     * @param array The tags to write as key/value pairs
+     *
+     * @return string
+     */
+    private function createTagData(array $tags)
+    {
+        $items = "";
+        foreach ($tags as $key => $value) {
+            $items .= pack("L", strlen($value));
+            $items .= pack("L", 0);
+            $items .= $key;
+            $items .= pack("c", 0x00);
+            $items .= $value;
+        }
+
+        $footer = self::PREAMBLE;
+
+        # Version
+        $footer .= pack("L", 2000);
+
+        # Size (including the bytes for the footer)
+        $footer .= pack("L", strlen($items) + 32);
+
+        # Number of tags
+        $footer .= pack("L", count($tags));
+
+        # Flags
+        $footer .= pack("L", 0);
+
+        $footer .= str_repeat(" ", 8);
+
+        return $items . $footer;
+    }
+
+
+    /**
      * Get the track title.
      *
      * @return string
@@ -218,5 +323,70 @@ class Ape extends AbstractModule
     public function getYear()
     {
         return (int) $this->getTag("year");
+    }
+
+
+    /**
+     * Set the track title.
+     *
+     * @param string $title The title name
+     *
+     * @return void
+     */
+    public function setTitle($title)
+    {
+        return $this->setTag("title", $title);
+    }
+
+
+    /**
+     * Set the track number.
+     *
+     * @param int $track The track number
+     *
+     * @return void
+     */
+    public function setTrackNumber($track)
+    {
+        return $this->setTag("tracknumber", $track);
+    }
+
+
+    /**
+     * Set the artist name.
+     *
+     * @param string $artist The artist name
+     *
+     * @return void
+     */
+    public function setArtist($artist)
+    {
+        return $this->setTag("artist", $artist);
+    }
+
+
+    /**
+     * Set the album name.
+     *
+     * @param string $album The album name
+     *
+     * @return void
+     */
+    public function setAlbum($album)
+    {
+        return $this->setTag("album", $album);
+    }
+
+
+    /**
+     * Set the release year.
+     *
+     * @param int $year The release year
+     *
+     * @return void
+     */
+    public function setYear($year)
+    {
+        return $this->setTag("year", $year);
     }
 }
