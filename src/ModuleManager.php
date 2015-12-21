@@ -37,8 +37,8 @@ trait ModuleManager
      */
     public function addDefaultModules()
     {
-        $this->addModule(new Modules\Audio\Ape);
-        $this->addModule(new Modules\Audio\Mp3);
+        $this->addModule(new Modules\Ape);
+        $this->addModule(new Modules\Id3);
 
         return $this;
     }
