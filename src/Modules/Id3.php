@@ -18,7 +18,7 @@ class Id3 extends AbstractModule
     protected function getTags()
     {
         $this->file->fseek(0, \SEEK_SET);
-        $position = $this->file->getStringPosition("ID3");
+        $position = $this->file->getNextPosition("ID3");
         $this->file->fseek($position, \SEEK_CUR);
 
         $header = $this->parseHeader();

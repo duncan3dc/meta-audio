@@ -18,7 +18,7 @@ class Ape extends AbstractModule
     protected function getTags()
     {
         $this->file->fseek(0, \SEEK_SET);
-        $position = $this->file->getStringPosition("APETAGEX");
+        $position = $this->file->getNextPosition("APETAGEX");
         $this->file->fseek($position, \SEEK_CUR);
 
         $header = $this->parseHeader();
