@@ -3,6 +3,7 @@
 namespace duncan3dc\MetaAudio\Modules;
 
 use duncan3dc\MetaAudio\Exception;
+use duncan3dc\Bom\Util as Bom;
 
 /**
  * Handle ID3 tags.
@@ -115,6 +116,8 @@ class Id3 extends AbstractModule
         $size = $this->getSynchsafeInt(substr($frames, 4, 4));
 
         $value = substr($frames, 11, $size - 1);
+
+        $value = Bom::removeBom($value);
 
         $frames = substr($frames, 10 + $size);
 

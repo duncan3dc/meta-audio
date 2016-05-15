@@ -12,6 +12,7 @@
         "role": "Developer"
     }],
     "require": {
+        "duncan3dc/bom-string": "^0.1.0",
         "php": ">=5.6.0"
     },
     "require-dev": {
