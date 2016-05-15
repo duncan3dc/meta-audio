@@ -7,6 +7,7 @@ namespace duncan3dc\MetaAudio;
  */
 class File extends \SplFileObject
 {
+    const CALLBACK_STOP = 408;
 
     /**
      * Process the remainder of the file from the current position through the callback.
@@ -24,7 +25,12 @@ class File extends \SplFileObject
                 throw new Exception("Failed to read from the file");
             }
 
-            $func($data);
+            $result = $func($data);
+
+            # If the callback has finished reading and isn't interested in the rest then stop here
+            if ($result === self::CALLBACK_STOP) {
+                break;
+            }
         }
     }
 
@@ -88,6 +94,9 @@ class File extends \SplFileObject
 
             # Calculate the position of the string as an offset of the starting position
             $stringPosition = $this->ftell() - $startingPosition - strlen($data) + $position;
+
+            # Tell the readNextCallback() that we're done reading
+            return self::CALLBACK_STOP;
         });
 
         # Position back to where we were before finding the string
@@ -123,6 +132,9 @@ class File extends \SplFileObject
 
             # Calculate the position of the string as an offset of the starting position
             $stringPosition = $this->ftell() - $startingPosition + $position;
+
+            # Tell the readNextCallback() that we're done reading
+            return self::CALLBACK_STOP;
         });
 
         # Position back to where we were before finding the string

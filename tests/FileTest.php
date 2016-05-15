@@ -45,6 +45,18 @@ class FileTest extends \PHPUnit_Framework_TestCase
     }
 
 
+    public function testGetNextPositionStart()
+    {
+        $contents = str_pad("ABC", 9000);
+        $contents .= "ABC";
+        $file = $this->getTestFile($contents);
+
+        $position = $file->getNextPosition("ABC");
+        $this->assertSame(0, $position);
+        $this->assertSame(0, $file->ftell());
+    }
+
+
     public function testGetPreviousPosition()
     {
         $file = $this->getTestFile("   ABC____ABC-----ABC#");
