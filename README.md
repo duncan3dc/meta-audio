@@ -24,11 +24,11 @@ $tagger->addDefaultModules();
 
 $mp3 = $tagger->open("/var/music/song.mp3");
 
-$mp3->getArtist();
-$mp3->getAlbum();
-$mp3->getYear();
-$mp3->getNumber();
-$mp3->getTitle();
+echo "Artist: {$mp3->getArtist()}\n";
+echo "Album: {$mp3->getAlbum()}\n";
+echo "Year: {$mp3->getYear()}\n";
+echo "Track No: {$mp3->getTrackNumber()}\n";
+echo "Title: {$mp3->getTitle()}\n";
 ```
 
 _Read more at http://duncan3dc.github.io/meta-audio/_  
