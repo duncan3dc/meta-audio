@@ -20,6 +20,6 @@ There is also an [AbstractModule]({{ site.baseurl }}/api/classes/duncan3dc.MetaA
 
 ## Community Modules
 
-If you've created a module that the community would love them publish it on [Packagist](//packagist.org/) and create a pull request to get it listed here.
+If you've created a module that the community would love then publish it on [Packagist](//packagist.org/) and create a pull request to get it listed here.
 
 Feel free to open an [issue](//github.com/duncan3dc/meta-audio/issues) to discuss including the module in core if it would benefit a lot of users to have it out of the box.
