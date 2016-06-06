@@ -17,9 +17,9 @@ class Ape extends AbstractModule
      */
     protected function getTags()
     {
-        $this->file->fseek(0, \SEEK_SET);
+        $this->file->fseek(0, \SEEK_END);
 
-        $position = $this->file->getNextPosition("APETAGEX");
+        $position = $this->file->getPreviousPosition("APETAGEX");
 
         if ($position === false) {
             return [];
@@ -28,6 +28,10 @@ class Ape extends AbstractModule
         $this->file->fseek($position, \SEEK_CUR);
 
         $header = $this->parseHeader();
+
+        if ($header["footer"]) {
+            $this->file->fseek($header["size"] * -1, \SEEK_CUR);
+        }
 
         $tags = [];
         for ($i = 0; $i < $header["items"]; $i++) {
@@ -51,11 +55,17 @@ class Ape extends AbstractModule
             throw new Exception("Invalid Ape tag, expected [APETAGEX], got [{$preamble}]");
         }
 
+        $version = unpack("L", $this->file->fread(4))[1];
+        $size = unpack("L", $this->file->fread(4))[1];
+        $items = unpack("L", $this->file->fread(4))[1];
+        $flags = unpack("L", $this->file->fread(4))[1];
+
         $header = [
-            "version"   =>  unpack("L", $this->file->fread(4))[1],
-            "size"      =>  unpack("L", $this->file->fread(4))[1],
-            "items"     =>  unpack("L", $this->file->fread(4))[1],
-            "flags"     =>  unpack("L", $this->file->fread(4))[1],
+            "version"   =>  $version,
+            "size"      =>  $size,
+            "items"     =>  $items,
+            "flags"     =>  $flags,
+            "footer"    =>  !($flags & 0x20000000),
         ];
 
         # Skip the empty space at the end of the header
