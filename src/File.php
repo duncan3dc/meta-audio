@@ -9,6 +9,8 @@ class File extends \SplFileObject
 {
     const CALLBACK_STOP = 408;
 
+    const BUFFER_SIZE = 32768;
+
     /**
      * Process the remainder of the file from the current position through the callback.
      *
@@ -19,7 +21,7 @@ class File extends \SplFileObject
     public function readNextCallback(callable $func)
     {
         while (!$this->eof()) {
-            $data = $this->fread(8192);
+            $data = $this->fread(self::BUFFER_SIZE);
 
             if ($data === false) {
                 throw new Exception("Failed to read from the file");
@@ -45,7 +47,7 @@ class File extends \SplFileObject
     public function readPreviousCallback(callable $func)
     {
         while ($this->ftell() > 0) {
-            $length = 8192;
+            $length = self::BUFFER_SIZE;
             if ($this->ftell() < $length) {
                 $length = $this->ftell();
             }
