@@ -21,7 +21,7 @@ class Tagger
         $file = new File($filename);
         $mp3 = new Mp3($file);
 
-        foreach ($this->modules as $module) {
+        foreach ($this->getModules() as $module) {
             $mp3->addModule($module);
         }
 

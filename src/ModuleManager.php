@@ -12,10 +12,10 @@ trait ModuleManager
     /**
      * @var ModuleInterface[] $modules The modules used to read tags.
      */
-    protected $modules = [];
+    private $modules = [];
 
 
-     /**
+    /**
      * Add a module to the stack.
      *
      * @param ModuleInterface The module object to add
@@ -54,5 +54,16 @@ trait ModuleManager
         $this->modules = [];
 
         return $this;
+    }
+
+
+    /**
+     * Get all active modules.
+     *
+     * @return ModuleInterface[]
+     */
+    protected function getModules()
+    {
+        return $this->modules;
     }
 }
