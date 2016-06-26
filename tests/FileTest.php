@@ -85,4 +85,25 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $this->assertfalse($position);
         $this->assertSame("ABC_", $file->fread(4));
     }
+
+
+    public function testReadAllFromStart()
+    {
+        $file = $this->getTestFile("   ABC____ABC-----ABC#");
+
+        $result = $file->readAll();
+
+        $this->assertSame("   ABC____ABC-----ABC#", $result);
+    }
+
+
+    public function testReadAllFromMiddle()
+    {
+        $file = $this->getTestFile("   ABC____ABC-----ABC#");
+
+        $file->fseek(8, \SEEK_CUR);
+        $result = $file->readAll();
+
+        $this->assertSame("__ABC-----ABC#", $result);
+    }
 }
