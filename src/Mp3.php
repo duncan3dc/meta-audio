@@ -2,6 +2,8 @@
 
 namespace duncan3dc\MetaAudio;
 
+use duncan3dc\MetaAudio\Interfaces\FileInterface;
+
 /**
  * Read/write tags from an mp3 file.
  */
@@ -10,7 +12,7 @@ class Mp3 implements ModuleManagerInterface
     use ModuleManager;
 
     /**
-     * @var File $file The file handler.
+     * @var FileInterface $file The file handler.
      */
     private $file;
 
@@ -18,9 +20,9 @@ class Mp3 implements ModuleManagerInterface
     /**
      * Create a new instance from a local file.
      *
-     * @param File $file The file to work with
+     * @param FileInterface $file The file to work with
      */
-    public function __construct(File $file)
+    public function __construct(FileInterface $file)
     {
         $this->file = $file;
     }

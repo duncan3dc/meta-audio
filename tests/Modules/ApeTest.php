@@ -17,7 +17,7 @@ class ApeTest extends TestCase
         $module = new Intruder(new Ape());
 
         $file = new File("php://memory");
-        $file->fwrite("NOPE");
+        $file->write("NOPE");
         $file->rewind();
         $module->open($file);
 

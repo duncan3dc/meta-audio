@@ -2,7 +2,7 @@
 
 namespace duncan3dc\MetaAudio\Modules;
 
-use duncan3dc\MetaAudio\File;
+use duncan3dc\MetaAudio\Interfaces\FileInterface;
 
 /**
  * Interface that all modules must implement to read/write tags.
@@ -13,11 +13,11 @@ interface ModuleInterface
     /**
      * Load the passed file.
      *
-     * @param File $file The file to read
+     * @param FileInterface $file The file to read
      *
      * @return $this
      */
-    public function open(File $file);
+    public function open(FileInterface $file);
 
 
     /**

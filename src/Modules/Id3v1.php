@@ -16,17 +16,17 @@ class Id3v1 extends AbstractModule
      */
     protected function getTags()
     {
-        $this->file->fseek(-128, \SEEK_END);
+        $this->file->seekFromEnd(-128);
 
-        if ($this->file->fread(3) !== self::PREAMBLE) {
+        if ($this->file->read(3) !== self::PREAMBLE) {
             return [];
         }
 
         $tags = [
-            "title"     =>  $this->file->fread(30),
-            "artist"    =>  $this->file->fread(30),
-            "album"     =>  $this->file->fread(30),
-            "year"      =>  $this->file->fread(4),
+            "title"     =>  $this->file->read(30),
+            "artist"    =>  $this->file->read(30),
+            "album"     =>  $this->file->read(30),
+            "year"      =>  $this->file->read(4),
         ];
 
         foreach ($tags as &$value) {
@@ -35,7 +35,7 @@ class Id3v1 extends AbstractModule
         unset($value);
 
         $track = 0;
-        $comment = $this->file->fread(30);
+        $comment = $this->file->read(30);
         if (substr($comment, 28, 1) === "\0" && substr($comment, 29, 1) !== "\0") {
             $track = ord(substr($comment, 29, 1));
         }
@@ -64,10 +64,10 @@ class Id3v1 extends AbstractModule
 
         $details = $this->createTagData($tags);
 
-        $this->file->ftruncate(0);
+        $this->file->truncate();
         $this->file->rewind();
-        $this->file->fwrite($contents);
-        $this->file->fwrite($details);
+        $this->file->write($contents);
+        $this->file->write($details);
     }
 
 

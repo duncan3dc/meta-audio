@@ -4,7 +4,7 @@ namespace duncan3dc\MetaAudioTests;
 
 use duncan3dc\MetaAudio\File;
 use PHPUnit\Framework\TestCase;
-use function assertFalse;
+use function assertNull;
 use function assertSame;
 
 class FileTest extends TestCase
@@ -26,25 +26,25 @@ class FileTest extends TestCase
 
         $position = $file->getNextPosition("ABC");
         assertSame(3, $position);
-        assertSame(0, $file->ftell());
+        assertSame(0, $file->getCurrentPosition());
 
-        $file->fseek(6, \SEEK_CUR);
+        $file->seek(6);
 
         $position = $file->getNextPosition("ABC");
         assertSame(4, $position);
-        assertSame(6, $file->ftell());
+        assertSame(6, $file->getCurrentPosition());
 
-        $file->fseek(7, \SEEK_CUR);
+        $file->seek(7);
 
         $position = $file->getNextPosition("ABC");
         assertSame(5, $position);
-        assertSame(13, $file->ftell());
+        assertSame(13, $file->getCurrentPosition());
 
-        $file->fseek(8, \SEEK_CUR);
+        $file->seek(8);
 
         $position = $file->getNextPosition("ABC");
-        assertFalse($position);
-        assertSame("#", $file->fread(1));
+        assertNull($position);
+        assertSame("#", $file->read(1));
     }
 
 
@@ -56,7 +56,7 @@ class FileTest extends TestCase
 
         $position = $file->getNextPosition("ABC");
         assertSame(0, $position);
-        assertSame(0, $file->ftell());
+        assertSame(0, $file->getCurrentPosition());
     }
 
 
@@ -64,29 +64,29 @@ class FileTest extends TestCase
     {
         $file = $this->getTestFile("   ABC____ABC-----ABC#");
 
-        $file->fseek(0, \SEEK_END);
+        $file->seekFromEnd(0);
 
         $position = $file->getPreviousPosition("ABC");
         assertSame(-4, $position);
-        assertSame(22, $file->ftell());
+        assertSame(22, $file->getCurrentPosition());
 
-        $file->fseek(-4, \SEEK_CUR);
+        $file->seek(-4);
 
         $position = $file->getPreviousPosition("ABC");
         assertSame(-8, $position);
-        assertSame(18, $file->ftell());
+        assertSame(18, $file->getCurrentPosition());
 
-        $file->fseek(-12, \SEEK_CUR);
+        $file->seek(-12);
 
         $position = $file->getPreviousPosition("ABC");
         assertSame(-3, $position);
-        assertSame(6, $file->ftell());
+        assertSame(6, $file->getCurrentPosition());
 
-        $file->fseek(-3, \SEEK_CUR);
+        $file->seek(-3);
 
         $position = $file->getPreviousPosition("ABC");
-        assertFalse($position);
-        assertSame("ABC_", $file->fread(4));
+        assertNull($position);
+        assertSame("ABC_", $file->read(4));
     }
 
 
@@ -104,7 +104,7 @@ class FileTest extends TestCase
     {
         $file = $this->getTestFile("   ABC____ABC-----ABC#");
 
-        $file->fseek(8, \SEEK_CUR);
+        $file->seek(8);
         $result = $file->readAll();
 
         assertSame("__ABC-----ABC#", $result);

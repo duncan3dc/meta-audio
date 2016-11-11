@@ -3,6 +3,7 @@
 namespace duncan3dc\MetaAudioTests\Ape;
 
 use duncan3dc\MetaAudio\File;
+use duncan3dc\MetaAudio\Interfaces\FileInterface;
 use duncan3dc\MetaAudio\Modules\Ape;
 use duncan3dc\PhpIni\State as IniState;
 use PHPUnit\Framework\TestCase;
@@ -18,7 +19,7 @@ class Test extends TestCase
 
     public function getModule($file)
     {
-        if (!$file instanceof File) {
+        if (!$file instanceof FileInterface) {
             $file = $this->getFile($file);
         }
 
@@ -53,7 +54,7 @@ class Test extends TestCase
 
         $tmp = tempnam(sys_get_temp_dir(), "meta-audio-");
         $file = new File($tmp);
-        $file->fwrite($original->readAll());
+        $file->write($original->readAll());
 
         $module = $this->getModule($file);
 

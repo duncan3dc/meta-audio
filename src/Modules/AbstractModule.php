@@ -3,6 +3,7 @@
 namespace duncan3dc\MetaAudio\Modules;
 
 use duncan3dc\MetaAudio\File;
+use duncan3dc\MetaAudio\Interfaces\FileInterface;
 
 /**
  * Base class for modules to extend.
@@ -20,7 +21,7 @@ abstract class AbstractModule implements ModuleInterface
     private $saveChanges;
 
     /**
-     * @var File $file The file to read.
+     * @var FileInterface $file The file to read.
      */
     protected $file;
 
@@ -28,16 +29,16 @@ abstract class AbstractModule implements ModuleInterface
     /**
      * Load the passed file.
      *
-     * @param File $file The file to read
+     * @param FileInterface $file The file to read
      *
      * @return $this
      */
-    public function open(File $file)
+    public function open(FileInterface $file)
     {
         # If this file is already loaded then don't do anything
         if ($this->file) {
-            $path1 = $this->file->getPath() . "/" . $this->file->getFilename();
-            $path2 = $file->getPath() . "/" . $file->getFilename();
+            $path1 = $this->file->getFullPath();
+            $path2 = $file->getFullPath();
             if ($path1 === $path2) {
                 return $this;
             }

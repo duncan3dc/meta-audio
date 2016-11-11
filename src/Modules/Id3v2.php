@@ -23,16 +23,16 @@ class Id3v2 extends AbstractModule
      */
     protected function getTags()
     {
-        $this->file->fseek(0, \SEEK_SET);
+        $this->file->seekFromStart(0);
 
         $position = $this->file->getNextPosition(self::PREAMBLE);
 
         # If there is no ID3v2 tag then return no tags
-        if ($position === false) {
+        if ($position === null) {
             return [];
         }
 
-        $this->file->fseek($position, \SEEK_CUR);
+        $this->file->seekFromStart($position);
 
         $header = $this->parseHeader();
 
@@ -41,7 +41,7 @@ class Id3v2 extends AbstractModule
             return [];
         }
 
-        $frames = $this->file->fread($header["size"]);
+        $frames = $this->file->read($header["size"]);
 
         $tags = [];
         while ($tag = $this->parseItem($frames)) {
@@ -106,26 +106,26 @@ class Id3v2 extends AbstractModule
      */
     private function parseHeader()
     {
-        $preamble = $this->file->fread(3);
+        $preamble = $this->file->read(3);
         if ($preamble !== self::PREAMBLE) {
             throw new Exception("Invalid ID3 tag, expected [" . self::PREAMBLE . "], got [{$preamble}]");
         }
 
-        $version = unpack("S", $this->file->fread(2))[1];
-        $flags = unpack("C", $this->file->fread(1))[1];
+        $version = unpack("S", $this->file->read(2))[1];
+        $flags = unpack("C", $this->file->read(1))[1];
 
         $header = [
             "version"   =>  $version,
             "flags"     =>  $flags,
-            "size"      =>  $this->fromSynchsafeInt($this->file->fread(4)),
+            "size"      =>  $this->fromSynchsafeInt($this->file->read(4)),
             "unsynch"   =>  (bool) ($flags & 0x80),
             "footer"    =>  (bool) ($flags & 0x10),
         ];
 
         # Skip the extended header
         if ($flags & 0x40) {
-            $size = $this->fromSynchsafeInt($this->file->fread(4));
-            $this->file->fread($size - 4);
+            $size = $this->fromSynchsafeInt($this->file->read(4));
+            $this->file->read($size - 4);
             $header["size"] -= $size;
         }
 
@@ -193,10 +193,10 @@ class Id3v2 extends AbstractModule
         # Locate the existing id3 tags so we can strip them out
         $this->file->rewind();
         $start = $this->file->getNextPosition(self::PREAMBLE);
-        if ($start !== false) {
-            $this->file->fseek($start, \SEEK_CUR);
+        if ($start !== null) {
+            $this->file->seekFromStart($start);
             $header = $this->parseHeader();
-            $end = $this->file->ftell() + $header["size"];
+            $end = $this->file->getCurrentPosition() + (int) $header["size"];
         }
 
         # Get the contents of the file (without the id3 tags)
@@ -204,13 +204,13 @@ class Id3v2 extends AbstractModule
         $this->file->rewind();
 
         # If we found an id3 tag
-        if ($start !== false) {
+        if ($start !== null) {
             # If the id3 tag isn't at the start of the file then get the data preceding it
             if ($start > 0) {
-                $contents .= $this->file->fread($start);
+                $contents .= $this->file->read($start);
             }
             # Position to the end of the id3 tag so we can start reading from there
-            $this->file->fseek($end, \SEEK_SET);
+            $this->file->seekFromStart($end);
         }
 
         # Read the rest of the file (following the id3 tag)
@@ -218,10 +218,10 @@ class Id3v2 extends AbstractModule
 
         $details = $this->createTagData($tags);
 
-        $this->file->ftruncate(5);
+        $this->file->truncate(5);
         $this->file->rewind();
-        $this->file->fwrite($details);
-        $this->file->fwrite($contents);
+        $this->file->write($details);
+        $this->file->write($contents);
     }
 
 

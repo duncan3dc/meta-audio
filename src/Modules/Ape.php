@@ -19,27 +19,27 @@ class Ape extends AbstractModule
      */
     protected function getTags()
     {
-        $this->file->fseek(0, \SEEK_END);
+        $this->file->seekFromEnd(0);
 
         # Loop until we find a valid set of tags.
         while (true) {
             $position = $this->file->getPreviousPosition(self::PREAMBLE);
 
             # It looks like there aren't any parsable ape tags in the file
-            if ($position === false) {
+            if ($position === null) {
                 break;
             }
 
             # Convert the start from a relative position to a literal
-            $position += $this->file->ftell();
+            $position += $this->file->getCurrentPosition();
 
-            $this->file->fseek($position, \SEEK_SET);
+            $this->file->seekFromStart($position);
 
             try {
                 return $this->parseTags();
             } catch (ApeParseException $e) {
                 # Ensure we position back to before these tags so we don't pick them up again
-                $this->file->fseek($position, \SEEK_SET);
+                $this->file->seekFromStart($position);
                 continue;
             }
         }
@@ -58,7 +58,7 @@ class Ape extends AbstractModule
         $header = $this->parseHeader();
 
         if ($header["footer"]) {
-            $this->file->fseek($header["size"] * -1, \SEEK_CUR);
+            $this->file->seek($header["size"] * -1);
         }
 
         $tags = [];
@@ -78,7 +78,7 @@ class Ape extends AbstractModule
      */
     private function parseHeader()
     {
-        $preamble = $this->file->fread(8);
+        $preamble = $this->file->read(8);
         if ($preamble !== self::PREAMBLE) {
             throw new BadMethodCallException("Invalid Ape tag, expected [" . self::PREAMBLE . "], got [{$preamble}]");
         }
@@ -97,7 +97,7 @@ class Ape extends AbstractModule
         ];
 
         # Skip the empty space at the end of the header
-        $this->file->fread(8);
+        $this->file->read(8);
 
         return $header;
     }
@@ -116,7 +116,7 @@ class Ape extends AbstractModule
 
         $key = "";
         while (!$this->file->eof()) {
-            $char = $this->file->fread(1);
+            $char = $this->file->read(1);
             if ($char === pack("c", 0x00)) {
                 break;
             }
@@ -155,7 +155,7 @@ class Ape extends AbstractModule
             if ($size > $remaining) {
                 $size = $remaining;
             }
-            $string .= $this->file->fread($size);
+            $string .= $this->file->read($size);
             $remaining -= $size;
         }
 
@@ -181,7 +181,7 @@ class Ape extends AbstractModule
         $this->file->rewind();
         while (true) {
             $start = $this->file->getNextPosition(self::PREAMBLE);
-            if ($start === false) {
+            if ($start === null) {
                 break;
             }
 
@@ -189,33 +189,33 @@ class Ape extends AbstractModule
              * Remember where we currently are in the file,
              * as we're about to start moving around.
              */
-            $current = $this->file->ftell();
+            $current = $this->file->getCurrentPosition();
 
             # Convert the start from a relative position to a literal
             $start = $current + $start;
 
             # Position to the ape tag and read in the header
-            $this->file->fseek($start, \SEEK_SET);
+            $this->file->seekFromStart($start);
             $header = $this->parseHeader();
 
             # If this is a footer then find the tag's actual start position
             if ($header["footer"]) {
-                $start -= $header["size"];
-                $end = $this->file->ftell();
+                $start -= (int) $header["size"];
+                $end = $this->file->getCurrentPosition();
             } else {
-                $end = $current + $header["size"];
+                $end = $current + (int) $header["size"];
             }
 
             # Jump back to where we last read to
-            $this->file->fseek($current, \SEEK_SET);
+            $this->file->seekFromStart($current);
 
             # Get any content before the ape tag
             if ($start > $current) {
-                $contents .= $this->file->fread($start - $current);
+                $contents .= $this->file->read((int) ($start - $current));
             }
 
             # Seek passed the ape tag we found
-            $this->file->fseek($end, \SEEK_SET);
+            $this->file->seekFromStart($end);
         }
 
         # Read the rest of the file (following the last ape tag)
@@ -225,11 +225,11 @@ class Ape extends AbstractModule
         $tags = $this->createTagData($tags);
 
         # Empty the file and position at the start so we can overwrite
-        $this->file->ftruncate(0);
+        $this->file->truncate();
         $this->file->rewind();
 
-        $this->file->fwrite($contents);
-        $this->file->fwrite($tags);
+        $this->file->write($contents);
+        $this->file->write($tags);
     }
 
 
