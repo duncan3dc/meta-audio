@@ -6,8 +6,9 @@ __WARNING: This library is still very much experimental, and will likely corrupt
 Full documentation is available at https://duncan3dc.github.io/meta-audio/  
 PHPDoc API documentation is also available at [https://duncan3dc.github.io/meta-audio/api/](https://duncan3dc.github.io/meta-audio/api/namespaces/duncan3dc.MetaAudio.html)  
 
-[![Build Status](https://img.shields.io/travis/duncan3dc/meta-audio.svg)](https://travis-ci.org/duncan3dc/meta-audio)
-[![Latest Version](https://img.shields.io/packagist/v/duncan3dc/meta-audio.svg)](https://packagist.org/packages/duncan3dc/meta-audio)
+[![Latest Stable Version](https://poser.pugx.org/duncan3dc/meta-audio/version.svg)](https://packagist.org/packages/duncan3dc/meta-audio)
+[![Build Status](https://travis-ci.org/duncan3dc/meta-audio.svg?branch=master)](https://travis-ci.org/duncan3dc/meta-audio)
+[![Coverage Status](https://coveralls.io/repos/github/duncan3dc/meta-audio/badge.svg?branch=master)](https://coveralls.io/github/duncan3dc/meta-audio)
 
 
 ## Installation
