@@ -2,7 +2,8 @@
 
 namespace duncan3dc\MetaAudio\Modules;
 
-use duncan3dc\MetaAudio\Exception;
+use duncan3dc\MetaAudio\Exceptions\ApeParseException;
+use duncan3dc\MetaAudio\Exceptions\BadMethodCallException;
 
 /**
  * Handle APE tags.
@@ -19,14 +20,40 @@ class Ape extends AbstractModule
     {
         $this->file->fseek(0, \SEEK_END);
 
-        $position = $this->file->getPreviousPosition("APETAGEX");
+        # Loop until we find a valid set of tags.
+        while (true) {
+            $position = $this->file->getPreviousPosition("APETAGEX");
 
-        if ($position === false) {
-            return [];
+            # It looks like there aren't any parsable ape tags in the file
+            if ($position === false) {
+                break;
+            }
+
+            # Convert the start from a relative position to a literal
+            $position += $this->file->ftell();
+
+            $this->file->fseek($position, \SEEK_SET);
+
+            try {
+                return $this->parseTags();
+            } catch (ApeParseException $e) {
+                # Ensure we position back to before these tags so we don't pick them up again
+                $this->file->fseek($position, \SEEK_SET);
+                continue;
+            }
         }
 
-        $this->file->fseek($position, \SEEK_CUR);
+        return [];
+    }
 
+
+    /**
+     * Parse the tags.
+     *
+     * @return array
+     */
+    private function parseTags()
+    {
         $header = $this->parseHeader();
 
         if ($header["footer"]) {
@@ -48,17 +75,17 @@ class Ape extends AbstractModule
      *
      * @return array
      */
-    protected function parseHeader()
+    private function parseHeader()
     {
         $preamble = $this->file->fread(8);
         if ($preamble !== "APETAGEX") {
-            throw new Exception("Invalid Ape tag, expected [APETAGEX], got [{$preamble}]");
+            throw new BadMethodCallException("Invalid Ape tag, expected [APETAGEX], got [{$preamble}]");
         }
 
-        $version = unpack("L", $this->file->fread(4))[1];
-        $size = unpack("L", $this->file->fread(4))[1];
-        $items = unpack("L", $this->file->fread(4))[1];
-        $flags = unpack("L", $this->file->fread(4))[1];
+        $version = unpack("L", $this->read(4))[1];
+        $size = unpack("L", $this->read(4))[1];
+        $items = unpack("L", $this->read(4))[1];
+        $flags = unpack("L", $this->read(4))[1];
 
         $header = [
             "version"   =>  $version,
@@ -80,11 +107,11 @@ class Ape extends AbstractModule
      *
      * @return array An array with 2 elements, the first is the item key, the second is the item's value
      */
-    protected function parseItem()
+    private function parseItem()
     {
-        $length = unpack("L", $this->file->fread(4))[1];
+        $length = unpack("L", $this->read(4))[1];
 
-        $flags = unpack("L", $this->file->fread(4))[1];
+        $flags = unpack("L", $this->read(4))[1];
 
         $key = "";
         while (!$this->file->eof()) {
@@ -102,6 +129,25 @@ class Ape extends AbstractModule
         }
 
         return [$key, $value];
+    }
+
+
+    /**
+     * Read some bytes from the file.
+     *
+     * @param int $bytes The number of bytes to read
+     *
+     * @return string
+     */
+    private function read($bytes)
+    {
+        $string = $this->file->fread($bytes);
+
+        if (strlen($string) !== $bytes) {
+            throw new ApeParseException("Unexpected end of file");
+        }
+
+        return $string;
     }
 
 
