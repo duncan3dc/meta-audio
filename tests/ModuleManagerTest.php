@@ -4,6 +4,7 @@ namespace duncan3dc\MetaAudioTests;
 
 use duncan3dc\MetaAudio\Modules\Ape;
 use duncan3dc\MetaAudio\Modules\Id3;
+use duncan3dc\ObjectIntruder\Intruder;
 use Mockery;
 
 class ModuleManagerTest extends \PHPUnit_Framework_TestCase
@@ -13,7 +14,8 @@ class ModuleManagerTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->manager = new ModuleManager;
+        $manager = new ModuleManager;
+        $this->manager = new Intruder($manager);
     }
 
 
@@ -23,20 +25,11 @@ class ModuleManagerTest extends \PHPUnit_Framework_TestCase
     }
 
 
-    private function getModules()
-    {
-        $reflected = new \ReflectionClass($this->manager);
-        $method = $reflected->getMethod("getModules");
-        $method->setAccessible(true);
-        return $method->invoke($this->manager);
-    }
-
-
     public function testAddDefaultModules()
     {
         $this->manager->addDefaultModules();
 
-        $modules = $this->getModules();
+        $modules = $this->manager->getModules();
 
         $this->assertSame(2, count($modules));
 
@@ -51,7 +44,7 @@ class ModuleManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->manager->addModule($module);
 
-        $this->assertSame([$module], $this->getModules());
+        $this->assertSame([$module], $this->manager->getModules());
     }
 
 
@@ -63,7 +56,7 @@ class ModuleManagerTest extends \PHPUnit_Framework_TestCase
         $this->manager->addModule($id3);
         $this->manager->addModule($ape);
 
-        $this->assertSame([$id3, $ape], $this->getModules());
+        $this->assertSame([$id3, $ape], $this->manager->getModules());
     }
 
 
@@ -73,10 +66,10 @@ class ModuleManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->manager->addModule($module);
 
-        $this->assertSame([$module], $this->getModules());
+        $this->assertSame([$module], $this->manager->getModules());
 
         $this->manager->clearModules();
 
-        $this->assertSame([], $this->getModules());
+        $this->assertSame([], $this->manager->getModules());
     }
 }

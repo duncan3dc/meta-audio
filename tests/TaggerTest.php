@@ -5,6 +5,7 @@ namespace duncan3dc\MetaAudioTests;
 use duncan3dc\MetaAudio\Modules\Id3;
 use duncan3dc\MetaAudio\Mp3;
 use duncan3dc\MetaAudio\Tagger;
+use duncan3dc\ObjectIntruder\Intruder;
 
 class TaggerTest extends \PHPUnit_Framework_TestCase
 {
@@ -35,12 +36,9 @@ class TaggerTest extends \PHPUnit_Framework_TestCase
 
         $file = $tagger->open($tmp);
 
-        $class = new \ReflectionClass($file);
-        $property = $class->getProperty("modules");
-        $property->setAccessible(true);
-        $modules = $property->getValue($file);
+        $intruder = new Intruder($file);
 
-        $this->assertSame($modules, [$module]);
+        $this->assertSame($intruder->modules, [$module]);
 
         unlink($tmp);
     }
