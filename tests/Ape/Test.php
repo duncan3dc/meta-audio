@@ -14,9 +14,11 @@ class Test extends \PHPUnit_Framework_TestCase
     }
 
 
-    public function getModule($name)
+    public function getModule($file)
     {
-        $file = $this->getFile($name);
+        if (!$file instanceof File) {
+            $file = $this->getFile($file);
+        }
 
         $module = new Ape;
         $module->open($file);
@@ -34,6 +36,22 @@ class Test extends \PHPUnit_Framework_TestCase
         $this->assertSame(2015, $module->getYear());
         $this->assertSame(3, $module->getTrackNumber());
         $this->assertSame("cold water", $module->getTitle());
+    }
+
+
+    public function test_can_fix_extra_corrupt_tags_at_the_end()
+    {
+        $original = $this->getFile("extra_corrupt_tags_at_end");
+
+        $tmp = tempnam("/tmp", "meta-audio-");
+        $file = new File($tmp);
+        $file->fwrite($original->readAll());
+
+        $module = $this->getModule($file);
+
+        $module->setArtist("tesseract")->save();
+        $file->rewind();
+        $this->assertSame(1, substr_count($file->readAll(), "APETAGEX"));
     }
 
 
