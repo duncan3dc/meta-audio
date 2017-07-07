@@ -123,7 +123,7 @@ class Ape extends AbstractModule
         }
 
         if ($length > 0) {
-            $value = $this->file->fread($length);
+            $value = $this->read($length);
         } else {
             $value = "";
         }
@@ -141,7 +141,22 @@ class Ape extends AbstractModule
      */
     private function read($bytes)
     {
-        $string = $this->file->fread($bytes);
+        $string = "";
+
+        # Read in chunks so an invalid size doesn't cause excessive memory usage
+        $remaining = $bytes;
+        while ($remaining > 0) {
+            if ($this->file->eof()) {
+                throw new ApeParseException("Unexpected end of file");
+            }
+
+            $size = 1024;
+            if ($size > $remaining) {
+                $size = $remaining;
+            }
+            $string .= $this->file->fread($size);
+            $remaining -= $size;
+        }
 
         if (strlen($string) !== $bytes) {
             throw new ApeParseException("Unexpected end of file");
