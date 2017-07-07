@@ -5,6 +5,25 @@ Changelog
 
 --------
 
+## 0.3.0 - 2017-07-09
+
+### Fixed
+
+* [Modules] Ignore corrupt partial APE tags at the end of files.
+* [Modules] Don't let corrupt APE tag lengths use excessive memory.
+
+### Added
+
+* [Modules] Add read support for ID3v1.1 tags.
+* [Modules] Add write support for ID3v1.1, ID3v2.4, and APEv2 tags.
+
+### Changed
+
+* [Support] Add support for PHP 7.1.
+* [Support] Drop support for HHVM.
+
+--------
+
 ## 0.2.0 - 2016-06-06
 
 ### Fixed
@@ -28,7 +47,7 @@ Changelog
 
 ### Added
 
-* [Modules] Created an ID3 module to read ID3v1 and ID3v2 tags.
+* [Modules] Created an ID3 module to read ID3v2 tags.
 * [Modules] Created an APE module to read APEv1 and APEv2 tags.
 
 --------
