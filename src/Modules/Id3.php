@@ -23,9 +23,9 @@ class Id3 extends AbstractModule
 
         $position = $this->file->getNextPosition(self::PREAMBLE);
 
-        # If there is no ID3 tag then just return an empty array
+        # If there is no ID3v2 tag then look for an ID3v1 tag
         if ($position === false) {
-            return [];
+            return $this->getSimpleTags();
         }
 
         $this->file->fseek($position, \SEEK_CUR);
@@ -39,6 +39,42 @@ class Id3 extends AbstractModule
             list($key, $value) = $tag;
             $tags[strtoupper($key)] = $value;
         }
+
+        return $tags;
+    }
+
+
+    /**
+    * Read any ID3v1.1 tags.
+    *
+    * @return array
+    */
+    private function getSimpleTags()
+    {
+        $this->file->fseek(-128, \SEEK_END);
+
+        if ($this->file->fread(3) !== "TAG") {
+            return [];
+        }
+
+        $tags = [
+            "TIT2"  =>  $this->file->fread(30),
+            "TPE1"  =>  $this->file->fread(30),
+            "TALB"  =>  $this->file->fread(30),
+            "TDRC"  =>  $this->file->fread(4),
+        ];
+
+        foreach ($tags as &$value) {
+            $value = rtrim($value, " \0");
+        }
+        unset($value);
+
+        $track = 0;
+        $comment = $this->file->fread(30);
+        if (substr($comment, 28, 1) === "\0" && substr($comment, 29, 1) !== "\0") {
+            $track = ord(substr($comment, 29, 1));
+        }
+        $tags["TRCK"] = $track;
 
         return $tags;
     }
@@ -86,7 +122,7 @@ class Id3 extends AbstractModule
             $string = $char . $string;
         }
 
-        return str_pad($string, 4, "\x00", STR_PAD_LEFT);
+        return str_pad($string, 4, "\0", \STR_PAD_LEFT);
     }
 
 
@@ -197,6 +233,7 @@ class Id3 extends AbstractModule
         $this->file->rewind();
         $this->file->fwrite($details);
         $this->file->fwrite($contents);
+        $this->file->fwrite($this->createSimpleTags($tags));
     }
 
 
@@ -228,6 +265,65 @@ class Id3 extends AbstractModule
         $header .= $this->toSynchsafeInt(strlen($details));
 
         return $header . $details;
+    }
+
+
+    /**
+     * Create the id3v1.1 tag content for the file.
+     *
+     * @param array $tags The key/value tags to use
+     *
+     * @return string
+     */
+    private function createSimpleTags(array $tags)
+    {
+        $content = "TAG";
+
+        $keys = ["TIT2", "TPE1", "TALB", "TDRC", "TRCK"];
+        foreach ($keys as $key) {
+            if (!array_key_exists($key, $tags)) {
+                $tags[$key] = "";
+            }
+        }
+
+        # Write the standard artist, album, title, etc
+        $content .= $this->formatSimpleTag($tags["TIT2"], 30);
+        $content .= $this->formatSimpleTag($tags["TPE1"], 30);
+        $content .= $this->formatSimpleTag($tags["TALB"], 30);
+        $content .= $this->formatSimpleTag($tags["TDRC"], 4);
+
+        # Don't bother with the 'comment' field
+        $content .= $this->formatSimpleTag("", 29);
+
+        # Write the track number (technically in the end of the comments field)
+        $content .= chr($tags["TRCK"]);
+
+        # We don't support the genre field yet
+        $content .= $this->formatSimpleTag("", 1);
+
+        if (strlen($content) !== 128) {
+            throw new \LengthException("Unable to generate the id3v1.1 tags");
+        }
+
+        return $content;
+    }
+
+
+    /**
+     * Pad out a value for simple id3v1.1 tags.
+     *
+     * @param string $value The value to pad
+     * @param int $length The length to pad it to
+     *
+     * @return string
+     */
+    private function formatSimpleTag($value, $length)
+    {
+        if (strlen($value) > $length) {
+            return substr($value, 0, $length);
+        }
+
+        return str_pad($value, $length, "\0");
     }
 
 
