@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -114,12 +114,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">10</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">18</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
@@ -144,37 +144,58 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1270291650"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1085642451"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1270291650" class="accordion-body collapse in">
+            <div id="namespace-1085642451" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1306247739"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-727709823"></a>
                                 <a href="../namespaces/duncan3dc.html" style="margin-left: 30px; padding-left: 0">duncan3dc</a>
             </div>
-            <div id="namespace-1306247739" class="accordion-body collapse ">
+            <div id="namespace-727709823" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1884677460"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1053744808"></a>
                                 <a href="../namespaces/duncan3dc.MetaAudio.html" style="margin-left: 30px; padding-left: 0">MetaAudio</a>
             </div>
-            <div id="namespace-1884677460" class="accordion-body collapse ">
+            <div id="namespace-1053744808" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1360854328"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-746488383"></a>
+                                <a href="../namespaces/duncan3dc.MetaAudio.Exceptions.html" style="margin-left: 30px; padding-left: 0">Exceptions</a>
+            </div>
+            <div id="namespace-746488383" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/duncan3dc.MetaAudio.Exceptions.Exception.html">Exception</a></li>
+                                                                                                    <li class="class"><a href="../classes/duncan3dc.MetaAudio.Exceptions.ApeParseException.html">ApeParseException</a></li>
+                                                    <li class="class"><a href="../classes/duncan3dc.MetaAudio.Exceptions.BadMethodCallException.html">BadMethodCallException</a></li>
+                                                    <li class="class"><a href="../classes/duncan3dc.MetaAudio.Exceptions.ParseException.html">ParseException</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1267271798"></a>
                                 <a href="../namespaces/duncan3dc.MetaAudio.Modules.html" style="margin-left: 30px; padding-left: 0">Modules</a>
             </div>
-            <div id="namespace-1360854328" class="accordion-body collapse ">
+            <div id="namespace-1267271798" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -230,7 +251,7 @@
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
                     <h1><small>\duncan3dc\MetaAudio</small>Mp3</h1>
-                    <p><em>Read tags from an mp3 file.</em></p>
+                    <p><em>Read/write tags from an mp3 file.</em></p>
                     
                     
                                         
@@ -258,6 +279,11 @@
                                                                     <a href="../classes/duncan3dc.MetaAudio.Mp3.html#method_getArtist" class="">getArtist()</a><br />
                                                                     <a href="../classes/duncan3dc.MetaAudio.Mp3.html#method_getAlbum" class="">getAlbum()</a><br />
                                                                     <a href="../classes/duncan3dc.MetaAudio.Mp3.html#method_getYear" class="">getYear()</a><br />
+                                                                    <a href="../classes/duncan3dc.MetaAudio.Mp3.html#method_setTitle" class="">setTitle()</a><br />
+                                                                    <a href="../classes/duncan3dc.MetaAudio.Mp3.html#method_setTrackNumber" class="">setTrackNumber()</a><br />
+                                                                    <a href="../classes/duncan3dc.MetaAudio.Mp3.html#method_setArtist" class="">setArtist()</a><br />
+                                                                    <a href="../classes/duncan3dc.MetaAudio.Mp3.html#method_setAlbum" class="">setAlbum()</a><br />
+                                                                    <a href="../classes/duncan3dc.MetaAudio.Mp3.html#method_setYear" class="">setYear()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No public properties found</em>
@@ -268,12 +294,10 @@
                         </section>
                         <section class="row-fluid protected">
                             <section class="span4">
-                                                                    <a href="../classes/duncan3dc.MetaAudio.Mp3.html#method_getModuleString" class="">getModuleString()</a><br />
-                                                                    <a href="../classes/duncan3dc.MetaAudio.Mp3.html#method_getModuleInt" class="">getModuleInt()</a><br />
+                                                                    <a href="../classes/duncan3dc.MetaAudio.ModuleManager.html#method_getModules" class="">getModules()</a><br />
                                                             </section>
                             <section class="span4">
-                                                                    <a href="../classes/duncan3dc.MetaAudio.ModuleManager.html#property_modules" class="">$modules</a><br />
-                                                                    <a href="../classes/duncan3dc.MetaAudio.Mp3.html#property_file" class="">$file</a><br />
+                                                                    <em>No protected properties found</em>
                                                             </section>
                             <section class="span4">
                                 <em>N/A</em>
@@ -281,10 +305,13 @@
                         </section>
                         <section class="row-fluid private">
                             <section class="span4">
-                                                                    <em>No private methods found</em>
+                                                                    <a href="../classes/duncan3dc.MetaAudio.Mp3.html#method_getModuleString" class="">getModuleString()</a><br />
+                                                                    <a href="../classes/duncan3dc.MetaAudio.Mp3.html#method_getModuleInt" class="">getModuleInt()</a><br />
+                                                                    <a href="../classes/duncan3dc.MetaAudio.Mp3.html#method_setModuleValue" class="">setModuleValue()</a><br />
                                                             </section>
                             <section class="span4">
-                                                                    <em>No private properties found</em>
+                                                                    <a href="../classes/duncan3dc.MetaAudio.ModuleManager.html#property_modules" class="">$modules</a><br />
+                                                                    <a href="../classes/duncan3dc.MetaAudio.Mp3.html#property_file" class="">$file</a><br />
                                                             </section>
                             <section class="span4">
                                 <em>N/A</em>
@@ -330,18 +357,18 @@
                 <aside class="span4 detailsbar"></aside>
             </div>
 
-                                                    <div class="row-fluid">
+                                                                    <div class="row-fluid">
         <div class="span8 content class">
             <a id="property_modules" name="property_modules" class="anchor"></a>
             <article class="property">
-                <h3 class="protected ">$modules</h3>
+                <h3 class="private ">$modules</h3>
                 <pre class="signature">$modules : array&lt;mixed,\duncan3dc\MetaAudio\Modules\ModuleInterface&gt;</pre>
                 <p><em></em></p>
                 
 
                                 <h4>Type</h4>
                 array&lt;mixed,<a href="../classes/duncan3dc.MetaAudio.Modules.ModuleInterface.html">\duncan3dc\MetaAudio\Modules\ModuleInterface</a>&gt;
-                &mdash; The modules used to read tags.                            </article>
+                &mdash; The modules used to read/write tags.                            </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
@@ -360,7 +387,7 @@
         <div class="span8 content class">
             <a id="property_file" name="property_file" class="anchor"></a>
             <article class="property">
-                <h3 class="protected ">$file</h3>
+                <h3 class="private ">$file</h3>
                 <pre class="signature">$file : \duncan3dc\MetaAudio\File</pre>
                 <p><em></em></p>
                 
@@ -380,7 +407,7 @@
         </aside>
     </div>
 
-                                            
+                            
                                     <a id="methods" name="methods"></a>
             <div class="row-fluid">
                 <div class="span8 content class"><h2>Methods</h2></div>
@@ -409,7 +436,7 @@
                 
                                     <h4>Returns</h4>
                     static
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -439,7 +466,7 @@
                 
                                     <h4>Returns</h4>
                     static
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -469,7 +496,7 @@
                 
                                     <h4>Returns</h4>
                     static
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -507,13 +534,15 @@
                 
                                     <h4>Returns</h4>
                     static
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.MetaAudio.Mp3.html"><div class="path-wrapper">\duncan3dc\MetaAudio\Mp3</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -535,13 +564,15 @@
                 
                                     <h4>Returns</h4>
                     string
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.MetaAudio.Mp3.html"><div class="path-wrapper">\duncan3dc\MetaAudio\Mp3</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -563,13 +594,15 @@
                 
                                     <h4>Returns</h4>
                     integer
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.MetaAudio.Mp3.html"><div class="path-wrapper">\duncan3dc\MetaAudio\Mp3</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -591,13 +624,15 @@
                 
                                     <h4>Returns</h4>
                     string
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.MetaAudio.Mp3.html"><div class="path-wrapper">\duncan3dc\MetaAudio\Mp3</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -619,13 +654,15 @@
                 
                                     <h4>Returns</h4>
                     string
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.MetaAudio.Mp3.html"><div class="path-wrapper">\duncan3dc\MetaAudio\Mp3</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -647,13 +684,227 @@
                 
                                     <h4>Returns</h4>
                     integer
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.MetaAudio.Mp3.html"><div class="path-wrapper">\duncan3dc\MetaAudio\Mp3</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setTitle" name="method_setTitle" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setTitle()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setTitle(string  <span class="argument">$title</span>) : static</pre>
+                <p><em>Set the track title.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$title </td>
+                                <td><p>The title name</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    static
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.MetaAudio.Mp3.html"><div class="path-wrapper">\duncan3dc\MetaAudio\Mp3</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setTrackNumber" name="method_setTrackNumber" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setTrackNumber()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setTrackNumber(integer  <span class="argument">$track</span>) : void</pre>
+                <p><em>Set the track number.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$track </td>
+                                <td><p>The track number</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.MetaAudio.Mp3.html"><div class="path-wrapper">\duncan3dc\MetaAudio\Mp3</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setArtist" name="method_setArtist" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setArtist()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setArtist(string  <span class="argument">$artist</span>) : void</pre>
+                <p><em>Set the artist name.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$artist </td>
+                                <td><p>The artist name</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.MetaAudio.Mp3.html"><div class="path-wrapper">\duncan3dc\MetaAudio\Mp3</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setAlbum" name="method_setAlbum" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setAlbum()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setAlbum(string  <span class="argument">$album</span>) : void</pre>
+                <p><em>Set the album name.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$album </td>
+                                <td><p>The album name</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.MetaAudio.Mp3.html"><div class="path-wrapper">\duncan3dc\MetaAudio\Mp3</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setYear" name="method_setYear" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setYear()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setYear(integer  <span class="argument">$year</span>) : void</pre>
+                <p><em>Set the release year.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$year </td>
+                                <td><p>The release year</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.MetaAudio.Mp3.html"><div class="path-wrapper">\duncan3dc\MetaAudio\Mp3</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getModules" name="method_getModules" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">getModules()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getModules() : array&lt;mixed,\duncan3dc\MetaAudio\Modules\ModuleInterface&gt;</pre>
+                <p><em>Get all active modules.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array&lt;mixed,<a href="../classes/duncan3dc.MetaAudio.Modules.ModuleInterface.html">\duncan3dc\MetaAudio\Modules\ModuleInterface</a>&gt;
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.MetaAudio.ModuleManager.html"><div class="path-wrapper">\duncan3dc\MetaAudio\ModuleManager</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -665,7 +916,7 @@
         <div class="span8 content class">
             <a id="method_getModuleString" name="method_getModuleString" class="anchor"></a>
             <article class="method">
-                <h3 class="protected ">getModuleString()</h3>
+                <h3 class="private ">getModuleString()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">getModuleString(string  <span class="argument">$method</span>) : string</pre>
                 <p><em>Get a string from the active modules.</em></p>
@@ -683,13 +934,15 @@
                 
                                     <h4>Returns</h4>
                     string
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.MetaAudio.Mp3.html"><div class="path-wrapper">\duncan3dc\MetaAudio\Mp3</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -701,7 +954,7 @@
         <div class="span8 content class">
             <a id="method_getModuleInt" name="method_getModuleInt" class="anchor"></a>
             <article class="method">
-                <h3 class="protected ">getModuleInt()</h3>
+                <h3 class="private ">getModuleInt()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">getModuleInt(string  <span class="argument">$method</span>) : integer</pre>
                 <p><em>Get an integer from the active modules.</em></p>
@@ -719,13 +972,15 @@
                 
                                     <h4>Returns</h4>
                     integer
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.MetaAudio.Mp3.html"><div class="path-wrapper">\duncan3dc\MetaAudio\Mp3</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -733,7 +988,50 @@
         </aside>
     </div>
 
-                                                    </div>
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setModuleValue" name="method_setModuleValue" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">setModuleValue()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setModuleValue(string  <span class="argument">$method</span>, mixed  <span class="argument">$value</span>) : static</pre>
+                <p><em>Set a value using all active modules.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$method </td>
+                                <td><p>The method name to call on the modules</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$value </td>
+                                <td><p>The value to pass to the module method</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    static
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.MetaAudio.Mp3.html"><div class="path-wrapper">\duncan3dc\MetaAudio\Mp3</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
@@ -783,7 +1081,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on June 6th, 2016 at 22:13.
+                    on July 9th, 2017 at 12:13.
                 </section>
             </section>
         </section>

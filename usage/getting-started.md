@@ -17,6 +17,6 @@ Then you can start to read the meta data:
 $mp3->getArtist();
 $mp3->getAlbum();
 $mp3->getYear();
-$mp3->getNumber();
+$mp3->getTrackNumber();
 $mp3->getTitle();
 ~~~

@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -114,12 +114,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">10</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">18</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
@@ -144,37 +144,58 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1776852987"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-594434304"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1776852987" class="accordion-body collapse in">
+            <div id="namespace-594434304" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1656205289"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1020325923"></a>
                                 <a href="../namespaces/duncan3dc.html" style="margin-left: 30px; padding-left: 0">duncan3dc</a>
             </div>
-            <div id="namespace-1656205289" class="accordion-body collapse ">
+            <div id="namespace-1020325923" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1182313519"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-441251463"></a>
                                 <a href="../namespaces/duncan3dc.MetaAudio.html" style="margin-left: 30px; padding-left: 0">MetaAudio</a>
             </div>
-            <div id="namespace-1182313519" class="accordion-body collapse ">
+            <div id="namespace-441251463" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1757751601"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1654625523"></a>
+                                <a href="../namespaces/duncan3dc.MetaAudio.Exceptions.html" style="margin-left: 30px; padding-left: 0">Exceptions</a>
+            </div>
+            <div id="namespace-1654625523" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/duncan3dc.MetaAudio.Exceptions.Exception.html">Exception</a></li>
+                                                                                                    <li class="class"><a href="../classes/duncan3dc.MetaAudio.Exceptions.ApeParseException.html">ApeParseException</a></li>
+                                                    <li class="class"><a href="../classes/duncan3dc.MetaAudio.Exceptions.BadMethodCallException.html">BadMethodCallException</a></li>
+                                                    <li class="class"><a href="../classes/duncan3dc.MetaAudio.Exceptions.ParseException.html">ParseException</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1371283719"></a>
                                 <a href="../namespaces/duncan3dc.MetaAudio.Modules.html" style="margin-left: 30px; padding-left: 0">Modules</a>
             </div>
-            <div id="namespace-1757751601" class="accordion-body collapse ">
+            <div id="namespace-1371283719" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -263,10 +284,10 @@
                         </section>
                         <section class="row-fluid protected">
                             <section class="span4">
-                                                                    <em>No protected methods found</em>
+                                                                    <a href="../classes/duncan3dc.MetaAudio.ModuleManager.html#method_getModules" class="">getModules()</a><br />
                                                             </section>
                             <section class="span4">
-                                                                    <a href="../classes/duncan3dc.MetaAudio.ModuleManager.html#property_modules" class="">$modules</a><br />
+                                                                    <em>No protected properties found</em>
                                                             </section>
                             <section class="span4">
                                 <em>N/A</em>
@@ -277,7 +298,7 @@
                                                                     <em>No private methods found</em>
                                                             </section>
                             <section class="span4">
-                                                                    <em>No private properties found</em>
+                                                                    <a href="../classes/duncan3dc.MetaAudio.ModuleManager.html#property_modules" class="">$modules</a><br />
                                                             </section>
                             <section class="span4">
                                 <em>N/A</em>
@@ -323,18 +344,18 @@
                 <aside class="span4 detailsbar"></aside>
             </div>
 
-                                                    <div class="row-fluid">
+                                                                    <div class="row-fluid">
         <div class="span8 content class">
             <a id="property_modules" name="property_modules" class="anchor"></a>
             <article class="property">
-                <h3 class="protected ">$modules</h3>
+                <h3 class="private ">$modules</h3>
                 <pre class="signature">$modules : array&lt;mixed,\duncan3dc\MetaAudio\Modules\ModuleInterface&gt;</pre>
                 <p><em></em></p>
                 
 
                                 <h4>Type</h4>
                 array&lt;mixed,<a href="../classes/duncan3dc.MetaAudio.Modules.ModuleInterface.html">\duncan3dc\MetaAudio\Modules\ModuleInterface</a>&gt;
-                &mdash; The modules used to read tags.                            </article>
+                &mdash; The modules used to read/write tags.                            </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
@@ -349,7 +370,7 @@
         </aside>
     </div>
 
-                                            
+                            
                                     <a id="methods" name="methods"></a>
             <div class="row-fluid">
                 <div class="span8 content class"><h2>Methods</h2></div>
@@ -378,7 +399,7 @@
                 
                                     <h4>Returns</h4>
                     static
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -408,7 +429,7 @@
                 
                                     <h4>Returns</h4>
                     static
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -438,7 +459,7 @@
                 
                                     <h4>Returns</h4>
                     static
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -476,13 +497,15 @@
                 
                                     <h4>Returns</h4>
                     <a href="../classes/duncan3dc.MetaAudio.Mp3.html">\duncan3dc\MetaAudio\Mp3</a>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.MetaAudio.Tagger.html"><div class="path-wrapper">\duncan3dc\MetaAudio\Tagger</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -490,7 +513,37 @@
         </aside>
     </div>
 
-                                                                    </div>
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getModules" name="method_getModules" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">getModules()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getModules() : array&lt;mixed,\duncan3dc\MetaAudio\Modules\ModuleInterface&gt;</pre>
+                <p><em>Get all active modules.</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array&lt;mixed,<a href="../classes/duncan3dc.MetaAudio.Modules.ModuleInterface.html">\duncan3dc\MetaAudio\Modules\ModuleInterface</a>&gt;
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/duncan3dc.MetaAudio.ModuleManager.html"><div class="path-wrapper">\duncan3dc\MetaAudio\ModuleManager</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
@@ -540,7 +593,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on June 6th, 2016 at 22:13.
+                    on July 9th, 2017 at 12:13.
                 </section>
             </section>
         </section>
