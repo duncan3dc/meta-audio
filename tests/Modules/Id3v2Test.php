@@ -3,17 +3,17 @@
 namespace duncan3dc\MetaAudioTests\Modules;
 
 use duncan3dc\MetaAudio\File;
-use duncan3dc\MetaAudio\Modules\Id3;
+use duncan3dc\MetaAudio\Modules\Id3v2;
 use duncan3dc\ObjectIntruder\Intruder;
 
-class Id3Test extends \PHPUnit_Framework_TestCase
+class Id3v2Test extends \PHPUnit_Framework_TestCase
 {
     private $module;
 
     public function setUp()
     {
         $file = new File(__DIR__ . "/../data/test.mp3");
-        $this->module = new Id3;
+        $this->module = new Id3v2;
         $this->module->open($file);
     }
 

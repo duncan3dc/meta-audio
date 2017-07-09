@@ -4,7 +4,8 @@ namespace duncan3dc\MetaAudioTests\Auto;
 
 use duncan3dc\MetaAudio\File;
 use duncan3dc\MetaAudio\Modules\Ape;
-use duncan3dc\MetaAudio\Modules\Id3;
+use duncan3dc\MetaAudio\Modules\Id3v1;
+use duncan3dc\MetaAudio\Modules\Id3v2;
 use duncan3dc\MetaAudio\Modules\ModuleInterface;
 
 class Test extends \PHPUnit_Framework_TestCase

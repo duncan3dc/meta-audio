@@ -4,7 +4,8 @@ namespace duncan3dc\MetaAudioTests;
 
 use duncan3dc\MetaAudio\File;
 use duncan3dc\MetaAudio\Modules\Ape;
-use duncan3dc\MetaAudio\Modules\Id3;
+use duncan3dc\MetaAudio\Modules\Id3v1;
+use duncan3dc\MetaAudio\Modules\Id3v2;
 use duncan3dc\MetaAudio\Modules\ModuleInterface;
 use duncan3dc\MetaAudio\Mp3;
 
@@ -64,8 +65,14 @@ class ConvertTest extends \PHPUnit_Framework_TestCase
     }
 
 
-    public function test_rewriting_tags_with_id3()
+    public function test_rewriting_tags_with_id3v1()
     {
-        $this->rewrite_an_old_file_with_new_tags(new Id3);
+        $this->rewrite_an_old_file_with_new_tags(new Id3v1);
+    }
+
+
+    public function test_rewriting_tags_with_id3v2()
+    {
+        $this->rewrite_an_old_file_with_new_tags(new Id3v2);
     }
 }

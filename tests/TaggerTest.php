@@ -2,7 +2,7 @@
 
 namespace duncan3dc\MetaAudioTests;
 
-use duncan3dc\MetaAudio\Modules\Id3;
+use duncan3dc\MetaAudio\Modules\Id3v2;
 use duncan3dc\MetaAudio\Mp3;
 use duncan3dc\MetaAudio\Tagger;
 use duncan3dc\ObjectIntruder\Intruder;
@@ -28,7 +28,7 @@ class TaggerTest extends \PHPUnit_Framework_TestCase
     {
         $tagger = new Tagger;
 
-        $module = new Id3;
+        $module = new Id3v2;
 
         $tagger->addModule($module);
 
