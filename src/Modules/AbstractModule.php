@@ -30,7 +30,7 @@ abstract class AbstractModule implements ModuleInterface
      *
      * @param File $file The file to read
      *
-     * @return static
+     * @return $this
      */
     public function open(File $file)
     {
@@ -114,7 +114,7 @@ abstract class AbstractModule implements ModuleInterface
     /**
      * Save the changes currently pending.
      *
-     * @return static
+     * @return $this
      */
     public function save()
     {
@@ -129,7 +129,7 @@ abstract class AbstractModule implements ModuleInterface
     /**
      * Throw away any pending changes.
      *
-     * @return static
+     * @return $this
      */
     public function revert()
     {

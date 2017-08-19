@@ -19,8 +19,6 @@ class Mp3
      * Create a new instance from a local file.
      *
      * @param File $file The file to work with
-     *
-     * @return static
      */
     public function __construct(File $file)
     {

@@ -20,7 +20,7 @@ trait ModuleManager
      *
      * @param ModuleInterface The module object to add
      *
-     * @return static
+     * @return $this
      */
     public function addModule(ModuleInterface $module)
     {
@@ -33,7 +33,7 @@ trait ModuleManager
     /**
      * Add the default set of modules the library ships with.
      *
-     * @return static
+     * @return $this
      */
     public function addDefaultModules()
     {
@@ -48,7 +48,7 @@ trait ModuleManager
     /**
      * Remove all previously defined modules.
      *
-     * @return static
+     * @return $this
      */
     public function clearModules()
     {

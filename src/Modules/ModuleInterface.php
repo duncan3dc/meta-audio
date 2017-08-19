@@ -15,7 +15,7 @@ interface ModuleInterface
      *
      * @param File $file The file to read
      *
-     * @return static
+     * @return $this
      */
     public function open(File $file);
 
@@ -23,7 +23,7 @@ interface ModuleInterface
     /**
      * Save the changes currently pending.
      *
-     * @return static
+     * @return $this
      */
     public function save();
 
@@ -31,7 +31,7 @@ interface ModuleInterface
     /**
      * Throw away any pending changes.
      *
-     * @return static
+     * @return $this
      */
     public function revert();
 
