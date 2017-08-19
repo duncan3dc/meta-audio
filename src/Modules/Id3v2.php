@@ -146,7 +146,23 @@ class Id3v2 extends AbstractModule
 
         $size = $this->fromSynchsafeInt(substr($frames, 4, 4));
 
+        $encoding = unpack("C", substr($frames, 10, 1))[1];
         $value = substr($frames, 11, $size - 1);
+
+        # UTF-16 strings are terminated with 2 bytes
+        if ($encoding === 1 || $encoding === 2) {
+            $value = substr($value, 0, -2);
+            if ($encoding === 2) {
+                $value = mb_convert_encoding($value, "UTF-8", "UTF-16BE");
+            }
+        } else {
+            # Everything else is terminated with a single byte
+            $value = substr($value, 0, -1);
+            # If it's not already UTF-8 then convert it now
+            if ($encoding !== 3) {
+                $value = utf8_encode($value);
+            }
+        }
 
         $value = Bom::removeBom($value);
 
@@ -219,10 +235,13 @@ class Id3v2 extends AbstractModule
 
         $details = "";
         foreach ($tags as $key => $value) {
+            # Declare the contents as UTF-8 terminated by a single null character
+            $data = pack("C", 3) . $value . "\0";
+
             $details .= $key;
-            $details .= $this->toSynchsafeInt(strlen($value) + 1);
-            $details .= "   ";
-            $details .= $value;
+            $details .= $this->toSynchsafeInt(strlen($data));
+            $details .= "\0\0";
+            $details .= $data;
         }
 
         $header .= $this->toSynchsafeInt(strlen($details));
