@@ -48,6 +48,32 @@ class Id3v2Test extends \PHPUnit_Framework_TestCase
     }
 
 
+    private function getEncoded()
+    {
+        $file = new File(__DIR__ . "/../data/id3v2-encoding.mp3");
+
+        $module = new Id3v2;
+        $module->open($file);
+
+        return $module;
+    }
+    public function testIso88591()
+    {
+        $module = $this->getEncoded();
+        $this->assertSame("Eidola", $module->getArtist());
+    }
+    public function testUtf16WithBom()
+    {
+        $module = $this->getEncoded();
+        $this->assertSame("To Speak, to Listen", $module->getAlbum());
+    }
+    public function testUtf16WithoutBom()
+    {
+        $module = $this->getEncoded();
+        $this->assertSame("The Abstract of a Planet in Resolve", $module->getTitle());
+    }
+
+
     public function synchsafeProvider()
     {
         $numbers = [0, 1, 9999];
