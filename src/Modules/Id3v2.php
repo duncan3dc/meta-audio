@@ -283,7 +283,14 @@ class Id3v2 extends AbstractModule
      */
     public function getArtist()
     {
-        return (string) $this->getTag("TPE1");
+        $tag = (string) $this->getTag("TPE1");
+
+        # If there's no main artist available, see if the album artist tag is populated
+        if ($tag === "") {
+            $tag = (string) $this->getTag("TPE2");
+        }
+
+        return $tag;
     }
 
 
@@ -344,6 +351,7 @@ class Id3v2 extends AbstractModule
      */
     public function setArtist($artist)
     {
+        $this->setTag("TPE2", $artist);
         return $this->setTag("TPE1", $artist);
     }
 
