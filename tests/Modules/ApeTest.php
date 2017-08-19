@@ -2,11 +2,27 @@
 
 namespace duncan3dc\MetaAudioTests\Modules;
 
+use duncan3dc\MetaAudio\Exceptions\BadMethodCallException;
 use duncan3dc\MetaAudio\File;
 use duncan3dc\MetaAudio\Modules\Ape;
+use duncan3dc\ObjectIntruder\Intruder;
 
 class ApeTest extends \PHPUnit_Framework_TestCase
 {
+
+    public function testParseHeader()
+    {
+        $module = new Intruder(new Ape);
+
+        $file = new File("php://memory");
+        $file->fwrite("NOPE");
+        $file->rewind();
+        $module->open($file);
+
+        $this->setExpectedException(BadMethodCallException::class, "Invalid Ape tag, expected [APETAGEX], got [NOPE]");
+        $module->parseHeader();
+    }
+
 
     private function getModule($path = null)
     {
