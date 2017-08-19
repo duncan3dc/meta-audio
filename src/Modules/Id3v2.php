@@ -12,6 +12,10 @@ class Id3v2 extends AbstractModule
 {
     const PREAMBLE = "ID3";
 
+    const HAS_BOM = 1;
+    const UTF_16 = 2;
+    const UTF_8 = 3;
+
     /**
      * Get all the tags from the currently loaded file.
      *
@@ -149,22 +153,22 @@ class Id3v2 extends AbstractModule
         $encoding = unpack("C", substr($frames, 10, 1))[1];
         $value = substr($frames, 11, $size - 1);
 
-        # UTF-16 strings are terminated with 2 bytes
-        if ($encoding === 1 || $encoding === 2) {
-            $value = substr($value, 0, -2);
-            if ($encoding === 2) {
-                $value = mb_convert_encoding($value, "UTF-8", "UTF-16BE");
-            }
-        } else {
-            # Everything else is terminated with a single byte
-            $value = substr($value, 0, -1);
-            # If it's not already UTF-8 then convert it now
-            if ($encoding !== 3) {
+        switch ($encoding) {
+            case self::HAS_BOM:
+                break;
+            case self::UTF_16:
+                $value = "\xFE\xFF" . $value;
+                break;
+            case self::UTF_8:
+                break;
+            default:
                 $value = utf8_encode($value);
-            }
         }
 
         $value = Bom::removeBom($value);
+
+        # Strings are unreliably terminated with nulls, so just strip any that are present
+        $value = rtrim($value, "\0");
 
         $frames = substr($frames, 10 + $size);
 
