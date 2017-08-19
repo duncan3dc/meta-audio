@@ -76,7 +76,7 @@ interface ModuleInterface
      *
      * @param string $title The title name
      *
-     * @return void
+     * @return $this
      */
     public function setTitle($title);
 
@@ -85,7 +85,7 @@ interface ModuleInterface
      *
      * @param int $track The track number
      *
-     * @return void
+     * @return $this
      */
     public function setTrackNumber($track);
 
@@ -94,7 +94,7 @@ interface ModuleInterface
      *
      * @param string $artist The artist name
      *
-     * @return void
+     * @return $this
      */
     public function setArtist($artist);
 
@@ -103,7 +103,7 @@ interface ModuleInterface
      *
      * @param string $album The album name
      *
-     * @return void
+     * @return $this
      */
     public function setAlbum($album);
 
@@ -112,7 +112,7 @@ interface ModuleInterface
      *
      * @param int $year The release year
      *
-     * @return void
+     * @return $this
      */
     public function setYear($year);
 }

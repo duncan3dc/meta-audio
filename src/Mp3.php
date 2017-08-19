@@ -135,7 +135,7 @@ class Mp3
      * @param string $method The method name to call on the modules
      * @param mixed $value The value to pass to the module method
      *
-     * @return static
+     * @return $this
      */
     private function setModuleValue($method, $value)
     {
@@ -153,7 +153,7 @@ class Mp3
      *
      * @param string $title The title name
      *
-     * @return static
+     * @return $this
      */
     public function setTitle($title)
     {
@@ -165,7 +165,7 @@ class Mp3
      *
      * @param int $track The track number
      *
-     * @return void
+     * @return $this
      */
     public function setTrackNumber($track)
     {
@@ -178,7 +178,7 @@ class Mp3
      *
      * @param string $artist The artist name
      *
-     * @return void
+     * @return $this
      */
     public function setArtist($artist)
     {
@@ -190,7 +190,7 @@ class Mp3
      *
      * @param string $album The album name
      *
-     * @return void
+     * @return $this
      */
     public function setAlbum($album)
     {
@@ -202,7 +202,7 @@ class Mp3
      *
      * @param int $year The release year
      *
-     * @return void
+     * @return $this
      */
     public function setYear($year)
     {

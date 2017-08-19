@@ -314,7 +314,7 @@ class Id3v2 extends AbstractModule
      *
      * @param string $title The title name
      *
-     * @return void
+     * @return $this
      */
     public function setTitle($title)
     {
@@ -327,7 +327,7 @@ class Id3v2 extends AbstractModule
      *
      * @param int $track The track number
      *
-     * @return void
+     * @return $this
      */
     public function setTrackNumber($track)
     {
@@ -340,7 +340,7 @@ class Id3v2 extends AbstractModule
      *
      * @param string $artist The artist name
      *
-     * @return void
+     * @return $this
      */
     public function setArtist($artist)
     {
@@ -353,7 +353,7 @@ class Id3v2 extends AbstractModule
      *
      * @param string $album The album name
      *
-     * @return void
+     * @return $this
      */
     public function setAlbum($album)
     {
@@ -366,7 +366,7 @@ class Id3v2 extends AbstractModule
      *
      * @param int $year The release year
      *
-     * @return void
+     * @return $this
      */
     public function setYear($year)
     {

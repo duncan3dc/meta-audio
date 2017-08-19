@@ -86,7 +86,7 @@ abstract class AbstractModule implements ModuleInterface
      * @param string $key The name of the tag to set
      * @param mixed $value The value to set the tag to
      *
-     * @return static
+     * @return $this
      */
     protected function setTag($key, $value)
     {
