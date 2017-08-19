@@ -5,6 +5,22 @@ Changelog
 
 --------
 
+## 0.4.0 - 2017-08-19
+
+### Fixed
+
+* [Modules] Correct the handling of character encodings in ID3v2 tags.
+
+### Added
+
+* [Modules] Keep the 'album artist' tag in sync with the 'artist' ID3v2 tag.
+
+### Changed
+
+* [Modules] Separated the ID3v1 and ID3v2 to their own classes.
+
+--------
+
 ## 0.3.0 - 2017-07-09
 
 ### Fixed
