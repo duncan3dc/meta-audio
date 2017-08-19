@@ -5,7 +5,7 @@ namespace duncan3dc\MetaAudio;
 /**
  * Read/write tags from an mp3 file.
  */
-class Mp3
+class Mp3 implements ModuleManagerInterface
 {
     use ModuleManager;
 

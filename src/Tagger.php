@@ -5,7 +5,7 @@ namespace duncan3dc\MetaAudio;
 /**
  * Factory class for creating Mp3 instance using a common set of modules.
  */
-class Tagger
+class Tagger implements ModuleManagerInterface
 {
     use ModuleManager;
 
