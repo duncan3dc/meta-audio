@@ -12,6 +12,10 @@ class Id3v2 extends AbstractModule
 {
     const PREAMBLE = "ID3";
 
+    const HAS_BOM = 1;
+    const UTF_16 = 2;
+    const UTF_8 = 3;
+
     /**
      * Get all the tags from the currently loaded file.
      *
@@ -146,9 +150,25 @@ class Id3v2 extends AbstractModule
 
         $size = $this->fromSynchsafeInt(substr($frames, 4, 4));
 
+        $encoding = unpack("C", substr($frames, 10, 1))[1];
         $value = substr($frames, 11, $size - 1);
 
+        switch ($encoding) {
+            case self::HAS_BOM:
+                break;
+            case self::UTF_16:
+                $value = "\xFE\xFF" . $value;
+                break;
+            case self::UTF_8:
+                break;
+            default:
+                $value = utf8_encode($value);
+        }
+
         $value = Bom::removeBom($value);
+
+        # Strings are unreliably terminated with nulls, so just strip any that are present
+        $value = rtrim($value, "\0");
 
         $frames = substr($frames, 10 + $size);
 
@@ -219,10 +239,13 @@ class Id3v2 extends AbstractModule
 
         $details = "";
         foreach ($tags as $key => $value) {
+            # Declare the contents as UTF-8 terminated by a single null character
+            $data = pack("C", 3) . $value . "\0";
+
             $details .= $key;
-            $details .= $this->toSynchsafeInt(strlen($value) + 1);
-            $details .= "   ";
-            $details .= $value;
+            $details .= $this->toSynchsafeInt(strlen($data));
+            $details .= "\0\0";
+            $details .= $data;
         }
 
         $header .= $this->toSynchsafeInt(strlen($details));
