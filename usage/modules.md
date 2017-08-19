@@ -9,8 +9,9 @@ The MetaAudio library is designed to support an unlimited number of tagging form
 
 At the moment the library ships with support for the essential MP3 tagging formats:
 
-* [ID3](//en.wikipedia.org/wiki/ID3)
-* [APE](//en.wikipedia.org/wiki/APE_tag)
+* [ID3v1](https://en.wikipedia.org/wiki/ID3#ID3v1)
+* [ID3v2](https://en.wikipedia.org/wiki/ID3#ID3v2)
+* [APE](https://en.wikipedia.org/wiki/APE_tag)
 
 However once you've installed the library you can create a module to support any tagging format you desire.
 

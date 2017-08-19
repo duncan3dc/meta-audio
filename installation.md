@@ -18,7 +18,7 @@ Or you can manually add it to your composer.json:
 ~~~javascript
 {
     "require": {
-        "duncan3dc/meta-audio": "^0.3.0"
+        "duncan3dc/meta-audio": "^0.4"
     }
 }
 ~~~

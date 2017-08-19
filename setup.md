@@ -2,6 +2,7 @@
 layout: default
 title: Setup
 permalink: /setup/
+api: Tagger
 ---
 
 All classes are in the `duncan3dc\MetaAudio` namespace.
@@ -24,11 +25,11 @@ $mp3 = $tagger->open("/var/music/song.mp3");
 The `addDefaultModules()` from the example above applies all the modules that ship with the library (currently ID3 and Ape). You can use specific modules like so:
 
 ~~~php
-use duncan3dc\MetaAudio\Modules\Id3;
+use duncan3dc\MetaAudio\Modules\Id3v1;
 use duncan3dc\MetaAudio\Tagger;
 
 $tagger = new Tagger;
-$tagger->addModule(new Id3);
+$tagger->addModule(new Id3v1);
 ~~~
 
 Read more about modules [here](../usage/modules/)
