@@ -36,6 +36,11 @@ class Id3v2 extends AbstractModule
 
         $header = $this->parseHeader();
 
+        # Id3v2.2 is obsolete, ignore any old tags
+        if ($header["version"] == 2) {
+            return [];
+        }
+
         $frames = $this->file->fread($header["size"]);
 
         $tags = [];
