@@ -45,4 +45,33 @@ class Id3v2MockTest extends \PHPUnit_Framework_TestCase
         $this->assertSame("coheed and cambria", $this->module->tags["TPE1"]);
         $this->assertSame("coheed and cambria", $this->module->tags["TPE2"]);
     }
+
+
+    public function keyProvider()
+    {
+        $keys = [
+            "AAAA"  =>  true,
+            "    "  =>  false,
+            "TIT2"  =>  true,
+            "TT2\0" =>  false,
+        ];
+        foreach ($keys as $key => $expected) {
+            yield [$key, $expected];
+        }
+    }
+    /**
+     * @dataProvider keyProvider
+     */
+    public function testValidKey($key, $expected)
+    {
+        $frames = $key . "\0\0\0\0\0\0\0";
+
+        $result = $this->module->parseItem($frames);
+
+        if ($expected) {
+            $this->assertSame([$key, ""], $result);
+        } else {
+            $this->assertNull($result);
+        }
+    }
 }

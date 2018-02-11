@@ -144,7 +144,7 @@ class Id3v2 extends AbstractModule
         $key = substr($frames, 0, 4);
 
         # Ensure a valid key was found
-        if ($key < "AAAA" || $key > "ZZZZ") {
+        if (!preg_match("/^[A-Z0-9]{4}$/", $key)) {
             return;
         }
 
