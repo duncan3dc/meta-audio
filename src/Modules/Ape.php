@@ -225,6 +225,12 @@ class Ape extends AbstractModule
         # Generate the new ape tags
         $tags = $this->createTagData($tags);
 
+        # Retain any ID3v1 tags that are in use
+        if (substr($contents, -128, 3) === Id3v1::PREAMBLE) {
+            $tags .= substr($contents, -128);
+            $contents = substr($contents, 0, -128);
+        }
+
         # Empty the file and position at the start so we can overwrite
         $this->file->ftruncate(0);
         $this->file->rewind();
