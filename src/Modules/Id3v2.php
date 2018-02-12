@@ -2,8 +2,9 @@
 
 namespace duncan3dc\MetaAudio\Modules;
 
-use duncan3dc\MetaAudio\Exception;
 use duncan3dc\Bom\Util as Bom;
+use duncan3dc\MetaAudio\Exception;
+use duncan3dc\MetaAudio\Utils\Bit;
 
 /**
  * Handle ID3v2.4 tags.
@@ -118,12 +119,12 @@ class Id3v2 extends AbstractModule
             "version"   =>  $version,
             "flags"     =>  $flags,
             "size"      =>  $this->fromSynchsafeInt($this->file->fread(4)),
-            "unsynch"   =>  (bool) ($flags & 0x80),
-            "footer"    =>  (bool) ($flags & 0x10),
+            "unsynch"   =>  Bit::isOn($flags, 7),
+            "footer"    =>  Bit::isOn($flags, 4),
         ];
 
         # Skip the extended header
-        if ($flags & 0x40) {
+        if (Bit::isOn($flags, 6)) {
             $size = $this->fromSynchsafeInt($this->file->fread(4));
             $this->file->fread($size - 4);
             $header["size"] -= $size;
