@@ -4,6 +4,7 @@ namespace duncan3dc\MetaAudio\Modules;
 
 use duncan3dc\MetaAudio\Exceptions\ApeParseException;
 use duncan3dc\MetaAudio\Exceptions\BadMethodCallException;
+use duncan3dc\MetaAudio\Utils\Bit;
 
 /**
  * Handle APE tags.
@@ -93,7 +94,7 @@ class Ape extends AbstractModule
             "size"      =>  $size,
             "items"     =>  $items,
             "flags"     =>  $flags,
-            "footer"    =>  !($flags & 0x20),
+            "footer"    =>  Bit::isOff($flags, 29),
         ];
 
         # Skip the empty space at the end of the header
