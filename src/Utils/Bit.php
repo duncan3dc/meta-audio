@@ -35,4 +35,32 @@ class Bit
     {
         return !static::isOn($value, $bit);
     }
+
+
+    /**
+     * Update the value to turn a bit on.
+     *
+     * @param int $value The decimal value to update
+     * @param int $bit The position of the bit
+     *
+     * @return int
+     */
+    public static function turnOn($value, $bit)
+    {
+        return ($value | (1 << $bit));
+    }
+
+
+    /**
+     * Update the value to turn a bit off.
+     *
+     * @param int $value The decimal value to update
+     * @param int $bit The position of the bit
+     *
+     * @return int
+     */
+    public static function turnOff($value, $bit)
+    {
+        return ($value & ~(1 << $bit));
+    }
 }
