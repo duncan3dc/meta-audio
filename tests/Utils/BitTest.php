@@ -56,4 +56,63 @@ class BitTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertSame(!$expected, Bit::isOff($value, $bit));
     }
+
+
+    public function turnOnProvider()
+    {
+        yield [0, 0, 1];
+        yield [0, 1, 2];
+
+        yield [1, 0, 1];
+        yield [1, 1, 3];
+
+        yield [2, 0, 3];
+        yield [2, 1, 2];
+        yield [2, 2, 6];
+
+        yield [3, 0, 3];
+        yield [3, 1, 3];
+        yield [3, 2, 7];
+
+        # Ensure we support all 32 bits used by the library
+        yield [4294967295, 31, 4294967295];
+        yield [2147483647, 31, 4294967295];
+    }
+    /**
+     * @dataProvider turnOnProvider
+     */
+    public function testTurnOn($value, $bit, $expected)
+    {
+        $this->assertSame($expected, Bit::turnOn($value, $bit));
+    }
+
+
+    public function turnOffProvider()
+    {
+        yield [0, 0, 0];
+        yield [0, 1, 0];
+
+        yield [1, 0, 0];
+        yield [1, 1, 1];
+
+        yield [2, 0, 2];
+        yield [2, 1, 0];
+        yield [2, 2, 2];
+
+        yield [3, 0, 2];
+        yield [3, 1, 1];
+        yield [3, 2, 3];
+
+        # Ensure we support all 32 bits used by the library
+        yield [4294967295, 31, 2147483647];
+        yield [2147483647, 31, 2147483647];
+        yield [4294967295, 0, 4294967294];
+    }
+    /**
+     * @dataProvider turnOffProvider
+     */
+    public function testTurnOff($value, $bit, $expected)
+    {
+        $this->assertSame($expected, Bit::turnOff($value, $bit));
+    }
 }
