@@ -163,7 +163,7 @@ class Mp3Test extends \PHPUnit_Framework_TestCase
 
     public function testWrite()
     {
-        $tmp = tempnam("/tmp", "meta-audio-");
+        $tmp = tempnam(sys_get_temp_dir(), "meta-audio-");
 
         $file = new File($tmp);
 

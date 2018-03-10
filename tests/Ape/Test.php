@@ -43,7 +43,7 @@ class Test extends \PHPUnit_Framework_TestCase
     {
         $original = $this->getFile("extra_corrupt_tags_at_end");
 
-        $tmp = tempnam("/tmp", "meta-audio-");
+        $tmp = tempnam(sys_get_temp_dir(), "meta-audio-");
         $file = new File($tmp);
         $file->fwrite($original->readAll());
 
