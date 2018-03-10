@@ -70,7 +70,7 @@ class ApeTest extends \PHPUnit_Framework_TestCase
 
     public function test_can_write_all_tags()
     {
-        $tmp = tempnam("/tmp", "meta-audio-ape-");
+        $tmp = tempnam(sys_get_temp_dir(), "meta-audio-ape-");
         copy(__DIR__ . "/../data/no-tags.mp3", $tmp);
 
         $module = $this->getModule($tmp);

@@ -15,7 +15,7 @@ class Test extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->tmp = tempnam("/tmp", "meta-audio-");
+        $this->tmp = tempnam(sys_get_temp_dir(), "meta-audio-");
     }
 
 
