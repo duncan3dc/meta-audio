@@ -83,7 +83,7 @@ class ApeTest extends \PHPUnit_Framework_TestCase
             ->setYear(2014)
             ->save();
 
-        $this->assertEquals(file_get_contents(__DIR__ . "/../data/ape-only.mp3"), file_get_contents($tmp));
+        $this->assertFileEquals(__DIR__ . "/../data/ape-only.mp3", $tmp);
         unlink($tmp);
     }
 }
