@@ -4,22 +4,27 @@ php:
   - 5.6
   - 7.0
   - 7.1
+  - 7.2
   - nightly
 
 matrix:
   allow_failures:
-  - php: nightly
+    - php: nightly
 
 env:
-  - COMPOSER_OPTS=""
-  - COMPOSER_OPTS="--prefer-lowest"
+  matrix:
+    - DEPENDENCIES="high"
+    - DEPENDENCIES="low"
+  global:
+    - DEFAULT_COMPOSER_FLAGS="--no-interaction --no-ansi --no-progress --no-suggest"
 
 install:
-  - composer self-update --snapshot
-  - composer update $COMPOSER_OPTS
+  - composer self-update
+  - if [[ "$DEPENDENCIES" = 'high' ]]; then travis_retry composer update $DEFAULT_COMPOSER_FLAGS; fi
+  - if [[ "$DEPENDENCIES" = 'low' ]]; then travis_retry composer update $DEFAULT_COMPOSER_FLAGS --prefer-lowest; fi
 
 script:
-  - vendor/bin/phpunit --coverage-clover=clover.xml
+  - vendor/bin/phpunit --coverage-clover=clover.xml --configuration phpunit.xml.dist
   - tests/lint.sh
 
 after_success:
@@ -28,5 +33,4 @@ after_success:
 git:
   depth: 1
 
-dist: trusty
 sudo: false
