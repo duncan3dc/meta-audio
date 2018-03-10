@@ -9,7 +9,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
     private function getTestFile($contents)
     {
-        $tmp = tempnam("/tmp", "meta-audio-");
+        $tmp = tempnam(sys_get_temp_dir(), "meta-audio-");
 
         file_put_contents($tmp, $contents);
 
