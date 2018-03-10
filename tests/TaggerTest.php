@@ -14,7 +14,7 @@ class TaggerTest extends \PHPUnit_Framework_TestCase
     {
         $tagger = new Tagger;
 
-        $tmp = tempnam("/tmp", "meta-audio-");
+        $tmp = tempnam(sys_get_temp_dir(), "meta-audio-");
 
         $file = $tagger->open($tmp);
 
@@ -32,7 +32,7 @@ class TaggerTest extends \PHPUnit_Framework_TestCase
 
         $tagger->addModule($module);
 
-        $tmp = tempnam("/tmp", "meta-audio-");
+        $tmp = tempnam(sys_get_temp_dir(), "meta-audio-");
 
         $file = $tagger->open($tmp);
 
