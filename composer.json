@@ -24,7 +24,11 @@
     },
     "autoload": {
         "psr-4": {
-            "duncan3dc\\MetaAudio\\": "src/",
+            "duncan3dc\\MetaAudio\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "duncan3dc\\MetaAudioTests\\": "tests/"
         }
     }
