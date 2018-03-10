@@ -86,9 +86,6 @@ class Test extends \PHPUnit_Framework_TestCase
 
         $module->save();
 
-        $expected = file_get_contents("{$path}/{$name}.mp3");
-        $result = file_get_contents($this->tmp);
-
-        $this->assertEquals($expected, $result);
+        $this->assertFileEquals("{$path}/{$name}.mp3", $this->tmp);
     }
 }

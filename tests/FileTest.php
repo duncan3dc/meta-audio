@@ -40,7 +40,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $file->fseek(8, \SEEK_CUR);
 
         $position = $file->getNextPosition("ABC");
-        $this->assertfalse($position);
+        $this->assertFalse($position);
         $this->assertSame("#", $file->fread(1));
     }
 
@@ -82,7 +82,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $file->fseek(-3, \SEEK_CUR);
 
         $position = $file->getPreviousPosition("ABC");
-        $this->assertfalse($position);
+        $this->assertFalse($position);
         $this->assertSame("ABC_", $file->fread(4));
     }
 
