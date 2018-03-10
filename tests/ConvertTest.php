@@ -14,7 +14,7 @@ class ConvertTest extends \PHPUnit_Framework_TestCase
 
     private function rewrite_an_old_file_with_new_tags(ModuleInterface $module)
     {
-        $tmp = tempnam("/tmp", "meta-audio-");
+        $tmp = tempnam(sys_get_temp_dir(), "meta-audio-");
         copy(__DIR__ . "/data/old.mp3", $tmp);
 
         $file = new File($tmp);
