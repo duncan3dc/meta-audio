@@ -23,13 +23,9 @@
         "satooshi/php-coveralls": "^1.0"
     },
     "autoload": {
-        "psr-4": {
-            "duncan3dc\\MetaAudio\\": "src/"
-        }
+        "psr-4": {"duncan3dc\\MetaAudio\\": "src/"}
     },
     "autoload-dev": {
-        "psr-4": {
-            "duncan3dc\\MetaAudioTests\\": "tests/"
-        }
+        "psr-4": {"duncan3dc\\MetaAudioTests\\": "tests/"}
     }
 }
