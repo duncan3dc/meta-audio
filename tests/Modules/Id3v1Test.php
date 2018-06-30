@@ -5,6 +5,8 @@ namespace duncan3dc\MetaAudioTests\Modules;
 use duncan3dc\MetaAudio\File;
 use duncan3dc\MetaAudio\Modules\Id3v1;
 use duncan3dc\ObjectIntruder\Intruder;
+use function assertEquals;
+use function assertSame;
 
 class Id3v1Test extends \PHPUnit_Framework_TestCase
 {
@@ -20,35 +22,35 @@ class Id3v1Test extends \PHPUnit_Framework_TestCase
     public function testGetTitle()
     {
         $module = $this->getModule();
-        $this->assertSame("intro", $module->getTitle());
+        assertSame("intro", $module->getTitle());
     }
 
 
     public function testGetTrackNumber()
     {
         $module = $this->getModule();
-        $this->assertSame(1, $module->getTrackNumber());
+        assertSame(1, $module->getTrackNumber());
     }
 
 
     public function testGetArtist()
     {
         $module = $this->getModule();
-        $this->assertSame("the offspring", $module->getArtist());
+        assertSame("the offspring", $module->getArtist());
     }
 
 
     public function testGetAlbum()
     {
         $module = $this->getModule();
-        $this->assertSame("conspiracy of one", $module->getAlbum());
+        assertSame("conspiracy of one", $module->getAlbum());
     }
 
 
     public function testGetYear()
     {
         $module = $this->getModule();
-        $this->assertSame(2000, $module->getYear());
+        assertSame(2000, $module->getYear());
     }
 
 
@@ -102,6 +104,6 @@ class Id3v1Test extends \PHPUnit_Framework_TestCase
 
         $result = $module->createTagData($tags);
 
-        $this->assertEquals($expected, $result);
+        assertEquals($expected, $result);
     }
 }

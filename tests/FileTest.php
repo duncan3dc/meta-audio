@@ -3,6 +3,8 @@
 namespace duncan3dc\MetaAudioTests;
 
 use duncan3dc\MetaAudio\File;
+use function assertFalse;
+use function assertSame;
 
 class FileTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,26 +24,26 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $file = $this->getTestFile("   ABC____ABC-----ABC#");
 
         $position = $file->getNextPosition("ABC");
-        $this->assertSame(3, $position);
-        $this->assertSame(0, $file->ftell());
+        assertSame(3, $position);
+        assertSame(0, $file->ftell());
 
         $file->fseek(6, \SEEK_CUR);
 
         $position = $file->getNextPosition("ABC");
-        $this->assertSame(4, $position);
-        $this->assertSame(6, $file->ftell());
+        assertSame(4, $position);
+        assertSame(6, $file->ftell());
 
         $file->fseek(7, \SEEK_CUR);
 
         $position = $file->getNextPosition("ABC");
-        $this->assertSame(5, $position);
-        $this->assertSame(13, $file->ftell());
+        assertSame(5, $position);
+        assertSame(13, $file->ftell());
 
         $file->fseek(8, \SEEK_CUR);
 
         $position = $file->getNextPosition("ABC");
-        $this->assertFalse($position);
-        $this->assertSame("#", $file->fread(1));
+        assertFalse($position);
+        assertSame("#", $file->fread(1));
     }
 
 
@@ -52,8 +54,8 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $file = $this->getTestFile($contents);
 
         $position = $file->getNextPosition("ABC");
-        $this->assertSame(0, $position);
-        $this->assertSame(0, $file->ftell());
+        assertSame(0, $position);
+        assertSame(0, $file->ftell());
     }
 
 
@@ -64,26 +66,26 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $file->fseek(0, \SEEK_END);
 
         $position = $file->getPreviousPosition("ABC");
-        $this->assertSame(-4, $position);
-        $this->assertSame(22, $file->ftell());
+        assertSame(-4, $position);
+        assertSame(22, $file->ftell());
 
         $file->fseek(-4, \SEEK_CUR);
 
         $position = $file->getPreviousPosition("ABC");
-        $this->assertSame(-8, $position);
-        $this->assertSame(18, $file->ftell());
+        assertSame(-8, $position);
+        assertSame(18, $file->ftell());
 
         $file->fseek(-12, \SEEK_CUR);
 
         $position = $file->getPreviousPosition("ABC");
-        $this->assertSame(-3, $position);
-        $this->assertSame(6, $file->ftell());
+        assertSame(-3, $position);
+        assertSame(6, $file->ftell());
 
         $file->fseek(-3, \SEEK_CUR);
 
         $position = $file->getPreviousPosition("ABC");
-        $this->assertFalse($position);
-        $this->assertSame("ABC_", $file->fread(4));
+        assertFalse($position);
+        assertSame("ABC_", $file->fread(4));
     }
 
 
@@ -93,7 +95,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
         $result = $file->readAll();
 
-        $this->assertSame("   ABC____ABC-----ABC#", $result);
+        assertSame("   ABC____ABC-----ABC#", $result);
     }
 
 
@@ -104,6 +106,6 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $file->fseek(8, \SEEK_CUR);
         $result = $file->readAll();
 
-        $this->assertSame("__ABC-----ABC#", $result);
+        assertSame("__ABC-----ABC#", $result);
     }
 }

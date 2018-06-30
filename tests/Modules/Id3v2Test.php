@@ -5,6 +5,7 @@ namespace duncan3dc\MetaAudioTests\Modules;
 use duncan3dc\MetaAudio\File;
 use duncan3dc\MetaAudio\Modules\Id3v2;
 use duncan3dc\ObjectIntruder\Intruder;
+use function assertSame;
 
 class Id3v2Test extends \PHPUnit_Framework_TestCase
 {
@@ -20,31 +21,31 @@ class Id3v2Test extends \PHPUnit_Framework_TestCase
 
     public function testGetTitle()
     {
-        $this->assertSame("copper colored quiet", $this->module->getTitle());
+        assertSame("copper colored quiet", $this->module->getTitle());
     }
 
 
     public function testGetTrackNumber()
     {
-        $this->assertSame(11, $this->module->getTrackNumber());
+        assertSame(11, $this->module->getTrackNumber());
     }
 
 
     public function testGetArtist()
     {
-        $this->assertSame("letlive", $this->module->getArtist());
+        assertSame("letlive", $this->module->getArtist());
     }
 
 
     public function testGetAlbum()
     {
-        $this->assertSame("if i'm the devil", $this->module->getAlbum());
+        assertSame("if i'm the devil", $this->module->getAlbum());
     }
 
 
     public function testGetYear()
     {
-        $this->assertSame(2016, $this->module->getYear());
+        assertSame(2016, $this->module->getYear());
     }
 
 
@@ -60,17 +61,17 @@ class Id3v2Test extends \PHPUnit_Framework_TestCase
     public function testIso88591()
     {
         $module = $this->getEncoded();
-        $this->assertSame("Eidola", $module->getArtist());
+        assertSame("Eidola", $module->getArtist());
     }
     public function testUtf16WithBom()
     {
         $module = $this->getEncoded();
-        $this->assertSame("To Speak, to Listen", $module->getAlbum());
+        assertSame("To Speak, to Listen", $module->getAlbum());
     }
     public function testUtf16WithoutBom()
     {
         $module = $this->getEncoded();
-        $this->assertSame("The Abstract of a Planet in Resolve", $module->getTitle());
+        assertSame("The Abstract of a Planet in Resolve", $module->getTitle());
     }
 
 
@@ -94,6 +95,6 @@ class Id3v2Test extends \PHPUnit_Framework_TestCase
         $string = $module->toSynchsafeInt($input);
         $result = $module->fromSynchsafeInt($string);
 
-        $this->assertSame($input, $result);
+        assertSame($input, $result);
     }
 }

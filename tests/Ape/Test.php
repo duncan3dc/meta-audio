@@ -5,6 +5,7 @@ namespace duncan3dc\MetaAudioTests\Ape;
 use duncan3dc\MetaAudio\File;
 use duncan3dc\MetaAudio\Modules\Ape;
 use duncan3dc\PhpIni\State as IniState;
+use function assertSame;
 
 class Test extends \PHPUnit_Framework_TestCase
 {
@@ -31,11 +32,11 @@ class Test extends \PHPUnit_Framework_TestCase
     {
         $module = $this->getModule("extra_corrupt_tags_at_end");
 
-        $this->assertSame("protest the hero", $module->getArtist());
-        $this->assertSame("pacific myth", $module->getAlbum());
-        $this->assertSame(2015, $module->getYear());
-        $this->assertSame(3, $module->getTrackNumber());
-        $this->assertSame("cold water", $module->getTitle());
+        assertSame("protest the hero", $module->getArtist());
+        assertSame("pacific myth", $module->getAlbum());
+        assertSame(2015, $module->getYear());
+        assertSame(3, $module->getTrackNumber());
+        assertSame("cold water", $module->getTitle());
     }
 
 
@@ -51,7 +52,7 @@ class Test extends \PHPUnit_Framework_TestCase
 
         $module->setArtist("tesseract")->save();
         $file->rewind();
-        $this->assertSame(1, substr_count($file->readAll(), "APETAGEX"));
+        assertSame(1, substr_count($file->readAll(), "APETAGEX"));
     }
 
 
@@ -72,6 +73,6 @@ class Test extends \PHPUnit_Framework_TestCase
             return $module->getArtist();
         });
 
-        $this->assertSame("closure in moscow", $result);
+        assertSame("closure in moscow", $result);
     }
 }

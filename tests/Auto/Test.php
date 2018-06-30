@@ -3,10 +3,8 @@
 namespace duncan3dc\MetaAudioTests\Auto;
 
 use duncan3dc\MetaAudio\File;
-use duncan3dc\MetaAudio\Modules\Ape;
-use duncan3dc\MetaAudio\Modules\Id3v1;
-use duncan3dc\MetaAudio\Modules\Id3v2;
 use duncan3dc\MetaAudio\Modules\ModuleInterface;
+use function assertFileEquals;
 
 class Test extends \PHPUnit_Framework_TestCase
 {
@@ -86,6 +84,6 @@ class Test extends \PHPUnit_Framework_TestCase
 
         $module->save();
 
-        $this->assertFileEquals("{$path}/{$name}.mp3", $this->tmp);
+        assertFileEquals("{$path}/{$name}.mp3", $this->tmp);
     }
 }

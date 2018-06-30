@@ -2,11 +2,12 @@
 
 namespace duncan3dc\MetaAudioTests;
 
-use Mockery;
 use duncan3dc\MetaAudio\File;
-use duncan3dc\MetaAudio\Modules\ModuleInterface;
 use duncan3dc\MetaAudio\Modules\Ape;
+use duncan3dc\MetaAudio\Modules\ModuleInterface;
 use duncan3dc\MetaAudio\Mp3;
+use Mockery;
+use function assertSame;
 
 class Mp3Test extends \PHPUnit_Framework_TestCase
 {
@@ -24,7 +25,7 @@ class Mp3Test extends \PHPUnit_Framework_TestCase
 
         $mp3 = new Mp3($file);
 
-        $this->assertSame("", $mp3->getArtist());
+        assertSame("", $mp3->getArtist());
     }
 
 
@@ -43,7 +44,7 @@ class Mp3Test extends \PHPUnit_Framework_TestCase
         $module2 = Mockery::mock(ModuleInterface::class);
         $mp3->addModule($module2);
 
-        $this->assertSame("first", $mp3->getArtist());
+        assertSame("first", $mp3->getArtist());
     }
 
 
@@ -64,7 +65,7 @@ class Mp3Test extends \PHPUnit_Framework_TestCase
         $module2->shouldReceive("getTitle")->with()->andReturn("second");
         $mp3->addModule($module2);
 
-        $this->assertSame("second", $mp3->getTitle());
+        assertSame("second", $mp3->getTitle());
     }
 
 
@@ -85,7 +86,7 @@ class Mp3Test extends \PHPUnit_Framework_TestCase
         $module2->shouldReceive("getAlbum")->with()->andReturn("second");
         $mp3->addModule($module2);
 
-        $this->assertSame("second", $mp3->getAlbum());
+        assertSame("second", $mp3->getAlbum());
     }
 
 
@@ -96,7 +97,7 @@ class Mp3Test extends \PHPUnit_Framework_TestCase
 
         $mp3 = new Mp3($file);
 
-        $this->assertSame(0, $mp3->getYear());
+        assertSame(0, $mp3->getYear());
     }
 
 
@@ -115,7 +116,7 @@ class Mp3Test extends \PHPUnit_Framework_TestCase
         $module2 = Mockery::mock(ModuleInterface::class);
         $mp3->addModule($module2);
 
-        $this->assertSame(1995, $mp3->getYear());
+        assertSame(1995, $mp3->getYear());
     }
 
 
@@ -136,7 +137,7 @@ class Mp3Test extends \PHPUnit_Framework_TestCase
         $module2->shouldReceive("getYear")->with()->andReturn(2008);
         $mp3->addModule($module2);
 
-        $this->assertSame(2008, $mp3->getYear());
+        assertSame(2008, $mp3->getYear());
     }
 
 
@@ -157,7 +158,7 @@ class Mp3Test extends \PHPUnit_Framework_TestCase
         $module2->shouldReceive("getTrackNumber")->with()->andReturn(4);
         $mp3->addModule($module2);
 
-        $this->assertSame(4, $mp3->getTrackNumber());
+        assertSame(4, $mp3->getTrackNumber());
     }
 
 
@@ -176,16 +177,16 @@ class Mp3Test extends \PHPUnit_Framework_TestCase
         $mp3->setArtist($artist);
         $mp3->setYear($year);
 
-        $this->assertSame($artist, $mp3->getArtist());
-        $this->assertSame($year, $mp3->getYear());
+        assertSame($artist, $mp3->getArtist());
+        assertSame($year, $mp3->getYear());
 
         unset($mp3);
 
         $mp3 = new Mp3($file);
         $mp3->addModule(new Ape);
 
-        $this->assertSame($artist, $mp3->getArtist());
-        $this->assertSame($year, $mp3->getYear());
+        assertSame($artist, $mp3->getArtist());
+        assertSame($year, $mp3->getYear());
 
         unlink($tmp);
     }

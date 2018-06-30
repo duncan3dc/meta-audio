@@ -2,6 +2,7 @@
 
 namespace duncan3dc\MetaAudioTests\Modules;
 
+use function assertFileEquals;
 use duncan3dc\MetaAudio\Exceptions\BadMethodCallException;
 use duncan3dc\MetaAudio\File;
 use duncan3dc\MetaAudio\Modules\Ape;
@@ -40,31 +41,31 @@ class ApeTest extends \PHPUnit_Framework_TestCase
 
     public function testGetTitle()
     {
-        $this->assertSame("copper colored quiet", $this->getModule()->getTitle());
+        assertSame("copper colored quiet", $this->getModule()->getTitle());
     }
 
 
     public function testGetTrackNumber()
     {
-        $this->assertSame(11, $this->getModule()->getTrackNumber());
+        assertSame(11, $this->getModule()->getTrackNumber());
     }
 
 
     public function testGetArtist()
     {
-        $this->assertSame("letlive", $this->getModule()->getArtist());
+        assertSame("letlive", $this->getModule()->getArtist());
     }
 
 
     public function testGetAlbum()
     {
-        $this->assertSame("if i'm the devil", $this->getModule()->getAlbum());
+        assertSame("if i'm the devil", $this->getModule()->getAlbum());
     }
 
 
     public function testGetYear()
     {
-        $this->assertSame(2016, $this->getModule()->getYear());
+        assertSame(2016, $this->getModule()->getYear());
     }
 
 
@@ -83,7 +84,7 @@ class ApeTest extends \PHPUnit_Framework_TestCase
             ->setYear(2014)
             ->save();
 
-        $this->assertFileEquals(__DIR__ . "/../data/ape-only.mp3", $tmp);
+        assertFileEquals(__DIR__ . "/../data/ape-only.mp3", $tmp);
         unlink($tmp);
     }
 }

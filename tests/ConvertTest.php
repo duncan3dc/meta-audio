@@ -8,6 +8,7 @@ use duncan3dc\MetaAudio\Modules\Id3v1;
 use duncan3dc\MetaAudio\Modules\Id3v2;
 use duncan3dc\MetaAudio\Modules\ModuleInterface;
 use duncan3dc\MetaAudio\Mp3;
+use function assertSame;
 
 class ConvertTest extends \PHPUnit_Framework_TestCase
 {
@@ -37,11 +38,11 @@ class ConvertTest extends \PHPUnit_Framework_TestCase
         $mp3->setYear($year);
 
         # Ensure the attributes are the same after setting them
-        $this->assertSame($title, $mp3->getTitle());
-        $this->assertSame($track, $mp3->getTrackNumber());
-        $this->assertSame($artist, $mp3->getArtist());
-        $this->assertSame($album, $mp3->getAlbum());
-        $this->assertSame($year, $mp3->getYear());
+        assertSame($title, $mp3->getTitle());
+        assertSame($track, $mp3->getTrackNumber());
+        assertSame($artist, $mp3->getArtist());
+        assertSame($album, $mp3->getAlbum());
+        assertSame($year, $mp3->getYear());
 
         # Create a new instance to rule out any caching
         unset($mp3);
@@ -49,11 +50,11 @@ class ConvertTest extends \PHPUnit_Framework_TestCase
         $mp3->addModule($module);
 
         # Ensure the tags we parse from our newly written file are still the same
-        $this->assertSame($title, $mp3->getTitle());
-        $this->assertSame($track, $mp3->getTrackNumber());
-        $this->assertSame($artist, $mp3->getArtist());
-        $this->assertSame($album, $mp3->getAlbum());
-        $this->assertSame($year, $mp3->getYear());
+        assertSame($title, $mp3->getTitle());
+        assertSame($track, $mp3->getTrackNumber());
+        assertSame($artist, $mp3->getArtist());
+        assertSame($album, $mp3->getAlbum());
+        assertSame($year, $mp3->getYear());
 
         unlink($tmp);
     }

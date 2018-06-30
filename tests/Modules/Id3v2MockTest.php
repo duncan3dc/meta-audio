@@ -4,6 +4,8 @@ namespace duncan3dc\MetaAudioTests\Modules;
 
 use duncan3dc\MetaAudio\Modules\Id3v2;
 use duncan3dc\ObjectIntruder\Intruder;
+use function assertNull;
+use function assertSame;
 
 class Id3v2MockTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,7 +25,7 @@ class Id3v2MockTest extends \PHPUnit_Framework_TestCase
             "TPE2" => "trivium",
         ];
 
-        $this->assertSame("rise against", $this->module->getArtist());
+        assertSame("rise against", $this->module->getArtist());
     }
     public function testGetAlbumArtist()
     {
@@ -31,7 +33,7 @@ class Id3v2MockTest extends \PHPUnit_Framework_TestCase
             "TPE2" => "trivium",
         ];
 
-        $this->assertSame("trivium", $this->module->getArtist());
+        assertSame("trivium", $this->module->getArtist());
     }
 
 
@@ -42,8 +44,8 @@ class Id3v2MockTest extends \PHPUnit_Framework_TestCase
         $this->module->setArtist("coheed and cambria");
         $this->module->saveChanges = false;
 
-        $this->assertSame("coheed and cambria", $this->module->tags["TPE1"]);
-        $this->assertSame("coheed and cambria", $this->module->tags["TPE2"]);
+        assertSame("coheed and cambria", $this->module->tags["TPE1"]);
+        assertSame("coheed and cambria", $this->module->tags["TPE2"]);
     }
 
 
@@ -69,9 +71,9 @@ class Id3v2MockTest extends \PHPUnit_Framework_TestCase
         $result = $this->module->parseItem($frames);
 
         if ($expected) {
-            $this->assertSame([$key, ""], $result);
+            assertSame([$key, ""], $result);
         } else {
-            $this->assertNull($result);
+            assertNull($result);
         }
     }
 }

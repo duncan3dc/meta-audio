@@ -6,6 +6,8 @@ use duncan3dc\MetaAudio\Modules\Id3v2;
 use duncan3dc\MetaAudio\Mp3;
 use duncan3dc\MetaAudio\Tagger;
 use duncan3dc\ObjectIntruder\Intruder;
+use function assertInstanceOf;
+use function assertSame;
 
 class TaggerTest extends \PHPUnit_Framework_TestCase
 {
@@ -18,7 +20,7 @@ class TaggerTest extends \PHPUnit_Framework_TestCase
 
         $file = $tagger->open($tmp);
 
-        $this->assertInstanceOf(Mp3::class, $file);
+        assertInstanceOf(Mp3::class, $file);
 
         unlink($tmp);
     }
@@ -38,7 +40,7 @@ class TaggerTest extends \PHPUnit_Framework_TestCase
 
         $intruder = new Intruder($file);
 
-        $this->assertSame($intruder->modules, [$module]);
+        assertSame($intruder->modules, [$module]);
 
         unlink($tmp);
     }
