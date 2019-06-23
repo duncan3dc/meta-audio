@@ -166,7 +166,7 @@ class File extends \SplFileObject
     {
         $contents = "";
 
-        $this->readNextCallback(function($data) use(&$contents) {
+        $this->readNextCallback(function ($data) use (&$contents) {
             $contents .= $data;
         });
 

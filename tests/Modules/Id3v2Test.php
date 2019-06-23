@@ -15,7 +15,7 @@ class Id3v2Test extends TestCase
     public function setUp(): void
     {
         $file = new File(__DIR__ . "/../data/test.mp3");
-        $this->module = new Id3v2;
+        $this->module = new Id3v2();
         $this->module->open($file);
     }
 
@@ -54,7 +54,7 @@ class Id3v2Test extends TestCase
     {
         $file = new File(__DIR__ . "/../data/id3v2-encoding.mp3");
 
-        $module = new Id3v2;
+        $module = new Id3v2();
         $module->open($file);
 
         return $module;

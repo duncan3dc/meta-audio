@@ -14,7 +14,7 @@ class Id3v2MockTest extends TestCase
 
     public function setUp(): void
     {
-        $module = new Id3v2;
+        $module = new Id3v2();
         $this->module = new Intruder($module);
     }
 

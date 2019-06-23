@@ -14,7 +14,7 @@ class ApeTest extends TestCase
 
     public function testParseHeader()
     {
-        $module = new Intruder(new Ape);
+        $module = new Intruder(new Ape());
 
         $file = new File("php://memory");
         $file->fwrite("NOPE");
@@ -34,7 +34,7 @@ class ApeTest extends TestCase
         }
         $file = new File($path);
 
-        $module = new Ape;
+        $module = new Ape();
         $module->open($file);
 
         return $module;
@@ -71,7 +71,10 @@ class ApeTest extends TestCase
     }
 
 
-    public function test_can_write_all_tags()
+    /**
+     * Ensure we can write all the various tags we support.
+     */
+    public function testSave1(): void
     {
         $tmp = tempnam(sys_get_temp_dir(), "meta-audio-ape-");
         copy(__DIR__ . "/../data/no-tags.mp3", $tmp);

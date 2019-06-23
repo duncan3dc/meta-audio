@@ -14,7 +14,7 @@ class Id3v1Test extends TestCase
     public function getModule()
     {
         $file = new File(__DIR__ . "/../data/id3v1.mp3");
-        $module = new Id3v1;
+        $module = new Id3v1();
         $module->open($file);
         return $module;
     }
@@ -101,7 +101,7 @@ class Id3v1Test extends TestCase
      */
     public function testCreateTagData($expected, array $tags)
     {
-        $module = new Intruder(new Id3v1);
+        $module = new Intruder(new Id3v1());
 
         $result = $module->createTagData($tags);
 

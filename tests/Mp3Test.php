@@ -170,7 +170,7 @@ class Mp3Test extends TestCase
         $file = new File($tmp);
 
         $mp3 = new Mp3($file);
-        $mp3->addModule(new Ape);
+        $mp3->addModule(new Ape());
 
         $artist = "Protest The Hero";
         $year = 2010;
@@ -184,7 +184,7 @@ class Mp3Test extends TestCase
         unset($mp3);
 
         $mp3 = new Mp3($file);
-        $mp3->addModule(new Ape);
+        $mp3->addModule(new Ape());
 
         assertSame($artist, $mp3->getArtist());
         assertSame($year, $mp3->getYear());

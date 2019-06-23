@@ -13,7 +13,7 @@ class AbstractModuleTest extends TestCase
 
     public function setUp(): void
     {
-        $module = new AbstractModule;
+        $module = new AbstractModule();
         $module->putTags([
             "artist"    =>  "lagwagon",
         ]);
@@ -97,7 +97,10 @@ class AbstractModuleTest extends TestCase
     }
 
 
-    public function test_save_writes_pending_changes()
+    /**
+     * Ensure that calling save writes pending changes to the file.
+     */
+    public function testSave1(): void
     {
         $this->module->setTag("artist", "strung out");
 

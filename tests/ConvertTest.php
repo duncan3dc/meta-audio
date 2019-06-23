@@ -14,7 +14,7 @@ use function assertSame;
 class ConvertTest extends TestCase
 {
 
-    private function rewrite_an_old_file_with_new_tags(ModuleInterface $module)
+    private function rewriteOldFileWithNewTags(ModuleInterface $module): void
     {
         $tmp = tempnam(sys_get_temp_dir(), "meta-audio-");
         copy(__DIR__ . "/data/old.mp3", $tmp);
@@ -61,20 +61,29 @@ class ConvertTest extends TestCase
     }
 
 
-    public function test_rewriting_tags_with_ape()
+    /**
+     * Ensure we can rewrite ape tags.
+     */
+    public function testApe(): void
     {
-        $this->rewrite_an_old_file_with_new_tags(new Ape);
+        $this->rewriteOldFileWithNewTags(new Ape());
     }
 
 
-    public function test_rewriting_tags_with_id3v1()
+    /**
+     * Ensure we can rewrite id3v1 tags.
+     */
+    public function testId3v1(): void
     {
-        $this->rewrite_an_old_file_with_new_tags(new Id3v1);
+        $this->rewriteOldFileWithNewTags(new Id3v1());
     }
 
 
-    public function test_rewriting_tags_with_id3v2()
+    /**
+     * Ensure we can rewrite id3v2 tags.
+     */
+    public function testId3v2(): void
     {
-        $this->rewrite_an_old_file_with_new_tags(new Id3v2);
+        $this->rewriteOldFileWithNewTags(new Id3v2());
     }
 }

@@ -18,7 +18,7 @@ class ModuleManagerTest extends TestCase
 
     public function setUp(): void
     {
-        $manager = new ModuleManager;
+        $manager = new ModuleManager();
         $this->manager = new Intruder($manager);
     }
 
@@ -46,7 +46,7 @@ class ModuleManagerTest extends TestCase
 
     public function testAddModule()
     {
-        $module = new Ape;
+        $module = new Ape();
 
         $this->manager->addModule($module);
 
@@ -56,9 +56,9 @@ class ModuleManagerTest extends TestCase
 
     public function testAddModules()
     {
-        $id3v1 = new Id3v1;
-        $id3v2 = new Id3v2;
-        $ape = new Ape;
+        $id3v1 = new Id3v1();
+        $id3v2 = new Id3v2();
+        $ape = new Ape();
 
         $this->manager->addModule($id3v1);
         $this->manager->addModule($id3v2);
@@ -70,7 +70,7 @@ class ModuleManagerTest extends TestCase
 
     public function testClearModules()
     {
-        $module = new Ape;
+        $module = new Ape();
 
         $this->manager->addModule($module);
 

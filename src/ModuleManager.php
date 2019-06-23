@@ -37,9 +37,9 @@ trait ModuleManager
      */
     public function addDefaultModules()
     {
-        $this->addModule(new Modules\Ape);
-        $this->addModule(new Modules\Id3v2);
-        $this->addModule(new Modules\Id3v1);
+        $this->addModule(new Modules\Ape());
+        $this->addModule(new Modules\Id3v2());
+        $this->addModule(new Modules\Id3v1());
 
         return $this;
     }

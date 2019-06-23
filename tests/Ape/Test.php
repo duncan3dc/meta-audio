@@ -22,14 +22,17 @@ class Test extends TestCase
             $file = $this->getFile($file);
         }
 
-        $module = new Ape;
+        $module = new Ape();
         $module->open($file);
 
         return $module;
     }
 
 
-    public function test_can_handle_extra_corrupt_tags_at_the_end()
+    /**
+     * Ensure we can handle extra corrupt tags at the end.
+     */
+    public function testRead1(): void
     {
         $module = $this->getModule("extra_corrupt_tags_at_end");
 
@@ -41,7 +44,10 @@ class Test extends TestCase
     }
 
 
-    public function test_can_fix_extra_corrupt_tags_at_the_end()
+    /**
+     * Ensure we can fix extra corrupt tags at the end.
+     */
+    public function testWrite1(): void
     {
         $original = $this->getFile("extra_corrupt_tags_at_end");
 
@@ -57,9 +63,12 @@ class Test extends TestCase
     }
 
 
-    public function test_can_handle_invalid_item_length()
+    /**
+     * Ensure we can handle items with an invalid length.
+     */
+    public function testRead2(): void
     {
-        $ini = new IniState;
+        $ini = new IniState();
 
         /**
          * The purpose of this test is to ensure the library doesn't

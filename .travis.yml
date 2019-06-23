@@ -23,6 +23,10 @@ script:
 jobs:
   include:
 
+    - stage: coding standards
+      script:
+        - vendor/bin/phpcs
+
     - stage: coverage
       script:
         - vendor/bin/phpunit --coverage-clover=coverage.xml

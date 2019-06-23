@@ -15,7 +15,7 @@ class TaggerTest extends TestCase
 
     public function testOpenMp3()
     {
-        $tagger = new Tagger;
+        $tagger = new Tagger();
 
         $tmp = tempnam(sys_get_temp_dir(), "meta-audio-");
 
@@ -29,9 +29,9 @@ class TaggerTest extends TestCase
 
     public function testOpenModules()
     {
-        $tagger = new Tagger;
+        $tagger = new Tagger();
 
-        $module = new Id3v2;
+        $module = new Id3v2();
 
         $tagger->addModule($module);
 
