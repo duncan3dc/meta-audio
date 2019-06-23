@@ -26,5 +26,11 @@
     },
     "autoload-dev": {
         "psr-4": {"duncan3dc\\MetaAudioTests\\": "tests/"}
+    },
+    "scripts": {
+        "test": [
+            "vendor/bin/phpunit",
+            "@composer validate --strict"
+        ]
     }
 }
