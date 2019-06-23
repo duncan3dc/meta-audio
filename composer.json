@@ -27,6 +27,7 @@
         "psr-4": {"duncan3dc\\MetaAudio\\": "src/"}
     },
     "autoload-dev": {
+        "files": ["vendor/phpunit/phpunit/src/Framework/Assert/Functions.php"],
         "psr-4": {"duncan3dc\\MetaAudioTests\\": "tests/"}
     },
     "scripts": {
