@@ -13,7 +13,7 @@
     }],
     "require": {
         "duncan3dc/bom-string": "^0.1|^0.2",
-        "php": "^7.1"
+        "php": "^7.2"
     },
     "require-dev": {
         "duncan3dc/object-intruder": "^0.3",
