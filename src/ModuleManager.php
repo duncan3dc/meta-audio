@@ -18,7 +18,7 @@ trait ModuleManager
     /**
      * Add a module to the stack.
      *
-     * @param ModuleInterface The module object to add
+     * @param ModuleInterface $module The module object to add
      *
      * @return $this
      */

@@ -2,8 +2,9 @@
 
 namespace duncan3dc\MetaAudio\Modules;
 
-use duncan3dc\MetaAudio\File;
 use duncan3dc\MetaAudio\Interfaces\FileInterface;
+use function assert;
+use function is_array;
 
 /**
  * Base class for modules to extend.
@@ -105,7 +106,7 @@ abstract class AbstractModule implements ModuleInterface
     /**
      * Write the specified tags to the currently loaded file.
      *
-     * @param array The tags to write as key/value pairs
+     * @param array $tags The tags to write as key/value pairs
      *
      * @return void
      */
@@ -120,6 +121,7 @@ abstract class AbstractModule implements ModuleInterface
     public function save()
     {
         if ($this->saveChanges) {
+            assert(is_array($this->tags));
             $this->putTags($this->tags);
             $this->saveChanges = false;
         }
@@ -150,6 +152,5 @@ abstract class AbstractModule implements ModuleInterface
         if ($this->saveChanges) {
             $this->save();
         }
-        return $this;
     }
 }

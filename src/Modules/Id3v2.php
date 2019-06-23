@@ -2,6 +2,7 @@
 
 namespace duncan3dc\MetaAudio\Modules;
 
+use function assert;
 use duncan3dc\MetaAudio\Exception;
 use duncan3dc\Bom\Util as Bom;
 
@@ -62,7 +63,7 @@ class Id3v2 extends AbstractModule
      *
      * @param string $string The synchsafe integer
      *
-     * @param int
+     * @return int
      */
     private function fromSynchsafeInt($string)
     {
@@ -73,7 +74,7 @@ class Id3v2 extends AbstractModule
             $int += $byte * pow(2, (4 - $i) * 7);
         }
 
-        return $int;
+        return (int) $int;
     }
 
 
@@ -82,7 +83,7 @@ class Id3v2 extends AbstractModule
      *
      * @param int $int The integer
      *
-     * @param string
+     * @return string
      */
     private function toSynchsafeInt($int)
     {
@@ -90,7 +91,7 @@ class Id3v2 extends AbstractModule
         while ($int > 0) {
             $float = $int / 128;
             $int = floor($float);
-            $char = chr(ceil(($float - $int) * 127));
+            $char = chr((int) ceil(($float - $int) * 127));
 
             $string = $char . $string;
         }
@@ -138,19 +139,19 @@ class Id3v2 extends AbstractModule
      *
      * @param string $frames The frames to parse the next one from
      *
-     * @return array An array with 2 elements, the first is the item key, the second is the item's value
+     * @return array|null An array with 2 elements, the first is the item key, the second is the item's value
      */
     private function parseItem(&$frames)
     {
         if (strlen($frames) < 1) {
-            return;
+            return null;
         }
 
         $key = substr($frames, 0, 4);
 
         # Ensure a valid key was found
         if (!preg_match("/^[A-Z0-9]{4}$/", $key)) {
-            return;
+            return null;
         }
 
         $size = $this->fromSynchsafeInt(substr($frames, 4, 4));
@@ -184,7 +185,7 @@ class Id3v2 extends AbstractModule
     /**
      * Write the specified tags to the currently loaded file.
      *
-     * @param array The tags to write as key/value pairs
+     * @param array $tags The tags to write as key/value pairs
      *
      * @return void
      */
@@ -205,6 +206,7 @@ class Id3v2 extends AbstractModule
 
         # If we found an id3 tag
         if ($start !== null) {
+            assert(isset($end));
             # If the id3 tag isn't at the start of the file then get the data preceding it
             if ($start > 0) {
                 $contents .= $this->file->read($start);

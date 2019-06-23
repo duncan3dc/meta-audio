@@ -29,6 +29,10 @@ jobs:
       script:
         - vendor/bin/phpcs
 
+    - stage: code quality
+      script:
+        - vendor/bin/phpstan analyse --level=max src tests
+
     - stage: coverage
       script:
         - vendor/bin/phpunit --coverage-clover=coverage.xml

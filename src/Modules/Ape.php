@@ -170,7 +170,7 @@ class Ape extends AbstractModule
     /**
      * Write the specified tags to the currently loaded file.
      *
-     * @param array The tags to write as key/value pairs
+     * @param array $tags The tags to write as key/value pairs
      *
      * @return void
      */
@@ -211,7 +211,7 @@ class Ape extends AbstractModule
 
             # Get any content before the ape tag
             if ($start > $current) {
-                $contents .= $this->file->read((int) ($start - $current));
+                $contents .= $this->file->read($start - $current);
             }
 
             # Seek passed the ape tag we found
@@ -236,7 +236,7 @@ class Ape extends AbstractModule
     /**
      * Create the header for the file.
      *
-     * @param array The tags to write as key/value pairs
+     * @param array $tags The tags to write as key/value pairs
      *
      * @return string
      */

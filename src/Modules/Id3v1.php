@@ -48,7 +48,7 @@ class Id3v1 extends AbstractModule
     /**
      * Write the specified tags to the currently loaded file.
      *
-     * @param array The tags to write as key/value pairs
+     * @param array $tags The tags to write as key/value pairs
      *
      * @return void
      */
