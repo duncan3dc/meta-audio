@@ -3,10 +3,11 @@
 namespace duncan3dc\MetaAudioTests;
 
 use duncan3dc\MetaAudio\File;
+use PHPUnit\Framework\TestCase;
 use function assertFalse;
 use function assertSame;
 
-class FileTest extends \PHPUnit_Framework_TestCase
+class FileTest extends TestCase
 {
 
     private function getTestFile($contents)

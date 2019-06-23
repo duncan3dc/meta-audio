@@ -5,13 +5,14 @@ namespace duncan3dc\MetaAudioTests\Modules;
 use duncan3dc\MetaAudio\File;
 use duncan3dc\MetaAudio\Modules\Id3v2;
 use duncan3dc\ObjectIntruder\Intruder;
+use PHPUnit\Framework\TestCase;
 use function assertSame;
 
-class Id3v2Test extends \PHPUnit_Framework_TestCase
+class Id3v2Test extends TestCase
 {
     private $module;
 
-    public function setUp()
+    public function setUp(): void
     {
         $file = new File(__DIR__ . "/../data/test.mp3");
         $this->module = new Id3v2;

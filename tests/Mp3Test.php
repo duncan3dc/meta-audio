@@ -7,12 +7,13 @@ use duncan3dc\MetaAudio\Modules\Ape;
 use duncan3dc\MetaAudio\Modules\ModuleInterface;
 use duncan3dc\MetaAudio\Mp3;
 use Mockery;
+use PHPUnit\Framework\TestCase;
 use function assertSame;
 
-class Mp3Test extends \PHPUnit_Framework_TestCase
+class Mp3Test extends TestCase
 {
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }

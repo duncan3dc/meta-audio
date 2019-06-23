@@ -4,20 +4,21 @@ namespace duncan3dc\MetaAudioTests\Auto;
 
 use duncan3dc\MetaAudio\File;
 use duncan3dc\MetaAudio\Modules\ModuleInterface;
+use PHPUnit\Framework\TestCase;
 use function assertFileEquals;
 
-class Test extends \PHPUnit_Framework_TestCase
+class Test extends TestCase
 {
     private $tmp;
 
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->tmp = tempnam(sys_get_temp_dir(), "meta-audio-");
     }
 
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unlink($this->tmp);
         unset($this->tmp);

@@ -4,13 +4,14 @@ namespace duncan3dc\MetaAudioTests\Modules;
 
 use duncan3dc\MetaAudio\File;
 use duncan3dc\ObjectIntruder\Intruder;
+use PHPUnit\Framework\TestCase;
 use function assertSame;
 
-class AbstractModuleTest extends \PHPUnit_Framework_TestCase
+class AbstractModuleTest extends TestCase
 {
     private $module;
 
-    public function setUp()
+    public function setUp(): void
     {
         $module = new AbstractModule;
         $module->putTags([
@@ -21,7 +22,7 @@ class AbstractModuleTest extends \PHPUnit_Framework_TestCase
     }
 
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->module);
     }

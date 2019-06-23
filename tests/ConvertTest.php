@@ -8,9 +8,10 @@ use duncan3dc\MetaAudio\Modules\Id3v1;
 use duncan3dc\MetaAudio\Modules\Id3v2;
 use duncan3dc\MetaAudio\Modules\ModuleInterface;
 use duncan3dc\MetaAudio\Mp3;
+use PHPUnit\Framework\TestCase;
 use function assertSame;
 
-class ConvertTest extends \PHPUnit_Framework_TestCase
+class ConvertTest extends TestCase
 {
 
     private function rewrite_an_old_file_with_new_tags(ModuleInterface $module)

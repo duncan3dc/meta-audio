@@ -5,9 +5,10 @@ namespace duncan3dc\MetaAudioTests\Ape;
 use duncan3dc\MetaAudio\File;
 use duncan3dc\MetaAudio\Modules\Ape;
 use duncan3dc\PhpIni\State as IniState;
+use PHPUnit\Framework\TestCase;
 use function assertSame;
 
-class Test extends \PHPUnit_Framework_TestCase
+class Test extends TestCase
 {
     public function getFile($name)
     {

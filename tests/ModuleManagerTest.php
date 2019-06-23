@@ -7,22 +7,23 @@ use duncan3dc\MetaAudio\Modules\Id3v1;
 use duncan3dc\MetaAudio\Modules\Id3v2;
 use duncan3dc\ObjectIntruder\Intruder;
 use Mockery;
+use PHPUnit\Framework\TestCase;
 use function assertInstanceOf;
 use function assertSame;
 
-class ModuleManagerTest extends \PHPUnit_Framework_TestCase
+class ModuleManagerTest extends TestCase
 {
     private $manager;
 
 
-    public function setUp()
+    public function setUp(): void
     {
         $manager = new ModuleManager;
         $this->manager = new Intruder($manager);
     }
 
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->manager);
         Mockery::close();

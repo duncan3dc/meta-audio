@@ -5,10 +5,11 @@ namespace duncan3dc\MetaAudioTests\Modules;
 use duncan3dc\MetaAudio\File;
 use duncan3dc\MetaAudio\Modules\Id3v1;
 use duncan3dc\ObjectIntruder\Intruder;
+use PHPUnit\Framework\TestCase;
 use function assertEquals;
 use function assertSame;
 
-class Id3v1Test extends \PHPUnit_Framework_TestCase
+class Id3v1Test extends TestCase
 {
     public function getModule()
     {

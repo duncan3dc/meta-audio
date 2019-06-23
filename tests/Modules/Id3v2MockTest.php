@@ -4,14 +4,15 @@ namespace duncan3dc\MetaAudioTests\Modules;
 
 use duncan3dc\MetaAudio\Modules\Id3v2;
 use duncan3dc\ObjectIntruder\Intruder;
+use PHPUnit\Framework\TestCase;
 use function assertNull;
 use function assertSame;
 
-class Id3v2MockTest extends \PHPUnit_Framework_TestCase
+class Id3v2MockTest extends TestCase
 {
     private $module;
 
-    public function setUp()
+    public function setUp(): void
     {
         $module = new Id3v2;
         $this->module = new Intruder($module);
