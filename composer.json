@@ -18,6 +18,7 @@
     "require-dev": {
         "duncan3dc/object-intruder": "^0.3.0",
         "duncan3dc/php-ini": "^1.0",
+        "maglnet/composer-require-checker": "^2.0",
         "mockery/mockery": "^1.2",
         "phpunit/phpunit": "^8.2"
     },
@@ -30,6 +31,7 @@
     "scripts": {
         "test": [
             "vendor/bin/phpunit",
+            "vendor/bin/composer-require-checker",
             "@composer validate --strict"
         ]
     }
