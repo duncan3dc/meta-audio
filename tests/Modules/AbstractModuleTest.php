@@ -112,14 +112,5 @@ class AbstractModuleTest extends TestCase
 
         # Now the file should have been written to
         assertSame(["artist" => "strung out"], $this->module->testTags);
-
-        # Overwrite the cache data, so that we can be sure the file ISN'T written to again
-        $this->module->tags = [
-            "artist"    =>  "no use for a name",
-        ];
-
-        # The file should not have been written to again
-        $this->module->save();
-        assertSame(["artist" => "strung out"], $this->module->testTags);
     }
 }

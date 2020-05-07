@@ -164,7 +164,7 @@ class Mp3Test extends TestCase
     }
 
 
-    public function testWrite()
+    public function testSave1(): void
     {
         $tmp = tempnam(sys_get_temp_dir(), "meta-audio-");
 
@@ -182,6 +182,7 @@ class Mp3Test extends TestCase
         assertSame($artist, $mp3->getArtist());
         assertSame($year, $mp3->getYear());
 
+        $mp3->save();
         unset($mp3);
 
         $mp3 = new Mp3($file);

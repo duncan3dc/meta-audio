@@ -44,7 +44,6 @@ class Id3v2MockTest extends TestCase
         $this->module->tags = [];
 
         $this->module->setArtist("coheed and cambria");
-        $this->module->saveChanges = false;
 
         assertSame("coheed and cambria", $this->module->tags["TPE1"]);
         assertSame("coheed and cambria", $this->module->tags["TPE2"]);

@@ -208,4 +208,19 @@ class Mp3 implements ModuleManagerInterface
     {
         return $this->setModuleValue(__FUNCTION__, (int) $year);
     }
+
+
+    /**
+     * Save the changes currently pending.
+     *
+     * @return $this
+     */
+    public function save(): self
+    {
+        foreach ($this->getModules() as $module) {
+            $module->open($this->file);
+            $module->save();
+        }
+        return $this;
+    }
 }

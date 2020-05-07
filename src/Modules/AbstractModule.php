@@ -16,11 +16,6 @@ abstract class AbstractModule implements ModuleInterface
     private $tags;
 
     /**
-     * @var bool $saveChanges Whether changes have been made that need to be saved.
-     */
-    private $saveChanges;
-
-    /**
      * @var FileInterface $file The file to read.
      */
     protected $file;
@@ -46,7 +41,6 @@ abstract class AbstractModule implements ModuleInterface
 
         $this->file = $file;
         $this->tags = null;
-        $this->saveChanges = false;
 
         return $this;
     }
@@ -95,7 +89,6 @@ abstract class AbstractModule implements ModuleInterface
 
         if ($old !== $value) {
             $this->tags[$key] = $value;
-            $this->saveChanges = true;
         }
 
         return $this;
@@ -119,10 +112,7 @@ abstract class AbstractModule implements ModuleInterface
      */
     public function save()
     {
-        if ($this->saveChanges) {
-            $this->putTags($this->tags);
-            $this->saveChanges = false;
-        }
+        $this->putTags($this->tags);
         return $this;
     }
 
@@ -135,21 +125,6 @@ abstract class AbstractModule implements ModuleInterface
     public function revert()
     {
         $this->tags = null;
-        $this->saveChanges = false;
-        return $this;
-    }
-
-
-    /**
-     * Ensure changes are saved automatically when the object is destroyed.
-     *
-     * @return void
-     */
-    public function __destruct()
-    {
-        if ($this->saveChanges) {
-            $this->save();
-        }
         return $this;
     }
 }
