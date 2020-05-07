@@ -5,6 +5,27 @@ Changelog
 
 --------
 
+## 0.5.0 - 2020-05-07
+
+### Added
+
+* [Mp3] The Mp3 class now has an explicit `save()` method.  
+This is a breaking change, 0.4.0 attempted to automatically save files but it was unreliable, you must always call `Mp3#save()` to update your mp3 files.
+
+### Fixed
+
+* [Modules] Ensure we only pick up valid 4 character ID3v1 tags.
+* [Modules] Don't attempt to parse ID3v2.2 tags.
+
+### Changed
+
+* [File] Create a file interface rather than coupling to the SPL File class.
+* [Modules] All constants are now private.
+* [Support] Add support for PHP 7.2, 7.3, and 7.4.
+* [Support] Drop support for PHP 5.6, 7.0, and 7.1.
+
+--------
+
 ## 0.4.0 - 2017-08-19
 
 ### Fixed
