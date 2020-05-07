@@ -7,6 +7,7 @@ use duncan3dc\MetaAudio\Mp3;
 use duncan3dc\MetaAudio\Tagger;
 use duncan3dc\ObjectIntruder\Intruder;
 use PHPUnit\Framework\TestCase;
+
 use function assertInstanceOf;
 use function assertSame;
 

@@ -7,6 +7,7 @@ use duncan3dc\MetaAudio\Interfaces\FileInterface;
 use duncan3dc\MetaAudio\Modules\Ape;
 use duncan3dc\PhpIni\State as IniState;
 use PHPUnit\Framework\TestCase;
+
 use function assertSame;
 
 class Test extends TestCase

@@ -4,6 +4,7 @@ namespace duncan3dc\MetaAudioTests;
 
 use duncan3dc\MetaAudio\File;
 use PHPUnit\Framework\TestCase;
+
 use function assertNull;
 use function assertSame;
 

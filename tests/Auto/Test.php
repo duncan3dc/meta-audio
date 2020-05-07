@@ -5,6 +5,7 @@ namespace duncan3dc\MetaAudioTests\Auto;
 use duncan3dc\MetaAudio\File;
 use duncan3dc\MetaAudio\Modules\ModuleInterface;
 use PHPUnit\Framework\TestCase;
+
 use function assertFileEquals;
 
 class Test extends TestCase

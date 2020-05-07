@@ -8,6 +8,7 @@ use duncan3dc\MetaAudio\Modules\ModuleInterface;
 use duncan3dc\MetaAudio\Mp3;
 use Mockery;
 use PHPUnit\Framework\TestCase;
+
 use function assertSame;
 
 class Mp3Test extends TestCase

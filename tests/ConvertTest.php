@@ -9,6 +9,7 @@ use duncan3dc\MetaAudio\Modules\Id3v2;
 use duncan3dc\MetaAudio\Modules\ModuleInterface;
 use duncan3dc\MetaAudio\Mp3;
 use PHPUnit\Framework\TestCase;
+
 use function assertSame;
 
 class ConvertTest extends TestCase

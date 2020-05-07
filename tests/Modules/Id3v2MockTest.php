@@ -5,6 +5,7 @@ namespace duncan3dc\MetaAudioTests\Modules;
 use duncan3dc\MetaAudio\Modules\Id3v2;
 use duncan3dc\ObjectIntruder\Intruder;
 use PHPUnit\Framework\TestCase;
+
 use function assertNull;
 use function assertSame;
 

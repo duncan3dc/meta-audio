@@ -8,6 +8,7 @@ use duncan3dc\MetaAudio\Modules\Id3v2;
 use duncan3dc\ObjectIntruder\Intruder;
 use Mockery;
 use PHPUnit\Framework\TestCase;
+
 use function assertInstanceOf;
 use function assertSame;
 

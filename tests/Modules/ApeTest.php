@@ -7,6 +7,7 @@ use duncan3dc\MetaAudio\File;
 use duncan3dc\MetaAudio\Modules\Ape;
 use duncan3dc\ObjectIntruder\Intruder;
 use PHPUnit\Framework\TestCase;
+
 use function assertFileEquals;
 
 class ApeTest extends TestCase

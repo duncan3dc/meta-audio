@@ -5,6 +5,7 @@ namespace duncan3dc\MetaAudio;
 use duncan3dc\MetaAudio\Exceptions\ReadException;
 use duncan3dc\MetaAudio\Exceptions\WriteException;
 use duncan3dc\MetaAudio\Interfaces\FileInterface;
+
 use function strlen;
 use function strpos;
 use function strrpos;

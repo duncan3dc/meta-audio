@@ -6,6 +6,7 @@ use duncan3dc\MetaAudio\File;
 use duncan3dc\MetaAudio\Modules\Id3v2;
 use duncan3dc\ObjectIntruder\Intruder;
 use PHPUnit\Framework\TestCase;
+
 use function assertSame;
 
 class Id3v2Test extends TestCase
