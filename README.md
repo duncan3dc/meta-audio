@@ -7,7 +7,7 @@ Full documentation is available at https://duncan3dc.github.io/meta-audio/
 PHPDoc API documentation is also available at [https://duncan3dc.github.io/meta-audio/api/](https://duncan3dc.github.io/meta-audio/api/namespaces/duncan3dc.MetaAudio.html)  
 
 [![release](https://poser.pugx.org/duncan3dc/meta-audio/version.svg)](https://packagist.org/packages/duncan3dc/meta-audio)
-[![build](https://travis-ci.org/duncan3dc/meta-audio.svg?branch=master)](https://travis-ci.org/duncan3dc/meta-audio)
+[![build](https://github.com/duncan3dc/meta-audio/workflows/.github/workflows/buildcheck.yml/badge.svg?branch=master)](https://github.com/duncan3dc/meta-audio/actions?query=branch%3Amaster+workflow%3A.github%2Fworkflows%2Fbuildcheck.yml)
 [![coverage](https://codecov.io/gh/duncan3dc/meta-audio/graph/badge.svg)](https://codecov.io/gh/duncan3dc/meta-audio)
 
 
