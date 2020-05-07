@@ -99,7 +99,7 @@ class Id3v1 extends AbstractModule
         $content .= $this->formatValue("", 29);
 
         # Write the track number (technically in the end of the comments field)
-        $content .= chr($tags["track"]);
+        $content .= chr((int) $tags["track"]);
 
         # We don't support the genre field yet
         $content .= $this->formatValue("", 1);
