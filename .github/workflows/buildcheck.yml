@@ -39,3 +39,19 @@ jobs:
 
       - name: Composer Validate
         run: docker exec ci composer validate --strict
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "7.4"
+
+      - name: Install Dependencies
+        run: composer update --no-interaction --no-ansi --prefer-dist
+
+      - name: PHPUnit
+        run: vendor/bin/phpunit
