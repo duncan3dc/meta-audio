@@ -10,11 +10,11 @@ use duncan3dc\Bom\Util as Bom;
  */
 class Id3v2 extends AbstractModule
 {
-    const PREAMBLE = "ID3";
+    private const PREAMBLE = "ID3";
 
-    const HAS_BOM = 1;
-    const UTF_16 = 2;
-    const UTF_8 = 3;
+    private const HAS_BOM = 1;
+    private const UTF_16 = 2;
+    private const UTF_8 = 3;
 
     /**
      * Get all the tags from the currently loaded file.

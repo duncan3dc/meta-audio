@@ -10,7 +10,7 @@ use duncan3dc\MetaAudio\Exceptions\BadMethodCallException;
  */
 class Ape extends AbstractModule
 {
-    const PREAMBLE = "APETAGEX";
+    private const PREAMBLE = "APETAGEX";
 
     /**
      * Get all the tags from the currently loaded file.

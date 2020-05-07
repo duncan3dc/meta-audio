@@ -7,7 +7,7 @@ namespace duncan3dc\MetaAudio\Modules;
  */
 class Id3v1 extends AbstractModule
 {
-    const PREAMBLE = "TAG";
+    private const PREAMBLE = "TAG";
 
     /**
      * Get all the tags from the currently loaded file.
