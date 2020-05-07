@@ -15,6 +15,7 @@ $mp3->setAlbum("Kezia");
 $mp3->setYear(2005);
 $mp3->setTrackNumber(1);
 $mp3->setTitle("No Stars Over Bethlehem");
+$mp3->save();
 ~~~
 
 All of the set methods return the current instance, so you can chain them together, like so:
@@ -25,7 +26,9 @@ $tagger
     ->setAlbum("Unreleased")
     ->setYear(2017)
     ->setTrackNumber(0)
-    ->setTitle("New Song");
+    ->setTitle("New Song")
+    ->save();
 ~~~
 
-Changes are automatically saved when the `Mp3` instance is destroyed.
+<p class="message-info">In version 0.4.0 and earlier changes were automatically saved, however this was unreliable so you must now call save() to store your changes to disk</p>
+<br>
