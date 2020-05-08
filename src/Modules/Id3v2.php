@@ -5,6 +5,14 @@ namespace duncan3dc\MetaAudio\Modules;
 use duncan3dc\MetaAudio\Exception;
 use duncan3dc\Bom\Util as Bom;
 
+use function file_put_contents;
+use function ltrim;
+use function rtrim;
+use function strpos;
+use function substr;
+use function unpack;
+use function var_dump;
+
 /**
  * Handle ID3v2.4 tags.
  */
@@ -321,6 +329,32 @@ class Id3v2 extends AbstractModule
     }
 
 
+    public function getImage(): Image
+    {
+        $data = $this->getTag("APIC");
+
+        $pos = strpos($data, "\0");
+        $mime = substr($data, 0, $pos);
+        $data = substr($data, $pos + 1);
+
+        var_dump($mime);
+
+        $type = unpack("C", substr($data, 0, 1))[1];
+        $data = substr($data, 1);
+        var_dump($type);
+
+        $pos = strpos($data, "\0\0");
+        $description = substr($data, 2, $pos);
+        $data = substr($data, $pos + 1);
+        var_dump($description);
+
+        var_dump(substr($data, 0, 20));
+        file_put_contents("/tmp/test.jpeg", ltrim($data, "\0"));
+
+        return Image::fromString($this->getTag("APIC"));
+    }
+
+
     /**
      * Set the track title.
      *
@@ -384,5 +418,11 @@ class Id3v2 extends AbstractModule
     public function setYear($year)
     {
         return $this->setTag("TDRC", $year);
+    }
+
+
+    public function setImage(Image $image): self
+    {
+        return $this->setTag("APIC", $image->asString());
     }
 }

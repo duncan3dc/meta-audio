@@ -4,6 +4,9 @@ namespace duncan3dc\MetaAudio;
 
 use duncan3dc\MetaAudio\Interfaces\FileInterface;
 
+use function is_string;
+use function strlen;
+
 /**
  * Read/write tags from an mp3 file.
  */
@@ -126,6 +129,20 @@ class Mp3 implements ModuleManagerInterface
     public function getYear()
     {
         return $this->getModuleInt(__FUNCTION__);
+    }
+
+
+    public function getImage(): ?Image
+    {
+        foreach ($this->getModules() as $module) {
+            $module->open($this->file);
+            $result = $module->getImage();
+            if ($result instanceof Image) {
+                return $result;
+            }
+        }
+
+        return null;
     }
 
 
