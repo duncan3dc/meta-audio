@@ -13,9 +13,18 @@ jobs:
           - 7.2
           - 7.3
           - 7.4
+          - 8.0
         composer:
           - ""
           - "--prefer-lowest"
+        include:
+          - php: 8.0
+            composer: "--ignore-platform-reqs"
+        exclude:
+          - php: 8.0
+            composer: ""
+          - php: 8.0
+            composer: "--prefer-lowest"
 
     steps:
       - uses: actions/checkout@v1
