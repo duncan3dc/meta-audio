@@ -17,14 +17,14 @@ class ModuleManagerTest extends TestCase
     private $manager;
 
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $manager = new ModuleManager();
         $this->manager = new Intruder($manager);
     }
 
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         unset($this->manager);
         Mockery::close();

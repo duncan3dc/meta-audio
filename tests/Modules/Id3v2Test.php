@@ -13,7 +13,7 @@ class Id3v2Test extends TestCase
 {
     private $module;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $file = new File(__DIR__ . "/../data/test.mp3");
         $this->module = new Id3v2();
