@@ -13,13 +13,13 @@ class Test extends TestCase
     private $tmp;
 
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->tmp = tempnam(sys_get_temp_dir(), "meta-audio-");
     }
 
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         unlink($this->tmp);
         unset($this->tmp);

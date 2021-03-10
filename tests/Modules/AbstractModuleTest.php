@@ -12,7 +12,7 @@ class AbstractModuleTest extends TestCase
 {
     private $module;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $module = new AbstractModule();
         $module->putTags([
@@ -23,7 +23,7 @@ class AbstractModuleTest extends TestCase
     }
 
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         unset($this->module);
     }

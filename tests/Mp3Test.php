@@ -14,7 +14,7 @@ use function assertSame;
 class Mp3Test extends TestCase
 {
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         Mockery::close();
     }
