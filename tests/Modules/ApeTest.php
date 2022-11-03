@@ -12,7 +12,6 @@ use function assertFileEquals;
 
 class ApeTest extends TestCase
 {
-
     public function testParseHeader()
     {
         $module = new Intruder(new Ape());

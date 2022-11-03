@@ -9,7 +9,6 @@ use duncan3dc\MetaAudio\Modules\ModuleInterface;
  */
 interface ModuleManagerInterface
 {
-
     /**
      * Add a module to the stack.
      *

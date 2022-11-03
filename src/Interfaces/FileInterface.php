@@ -10,7 +10,6 @@ use duncan3dc\MetaAudio\Exceptions\WriteException;
  */
 interface FileInterface
 {
-
     /**
      * Get the path including the filename.
      *

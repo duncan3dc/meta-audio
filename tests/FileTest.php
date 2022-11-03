@@ -10,7 +10,6 @@ use function assertSame;
 
 class FileTest extends TestCase
 {
-
     private function getTestFile($contents)
     {
         $tmp = tempnam(sys_get_temp_dir(), "meta-audio-");

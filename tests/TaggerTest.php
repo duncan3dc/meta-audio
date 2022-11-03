@@ -13,7 +13,6 @@ use function assertSame;
 
 class TaggerTest extends TestCase
 {
-
     public function testOpenMp3()
     {
         $tagger = new Tagger();
