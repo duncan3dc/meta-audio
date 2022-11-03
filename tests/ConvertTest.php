@@ -14,7 +14,6 @@ use function assertSame;
 
 class ConvertTest extends TestCase
 {
-
     private function rewriteOldFileWithNewTags(ModuleInterface $module): void
     {
         $tmp = tempnam(sys_get_temp_dir(), "meta-audio-");

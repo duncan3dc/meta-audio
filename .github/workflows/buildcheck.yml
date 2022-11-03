@@ -1,4 +1,5 @@
 on:
+  pull_request:
   push:
   schedule:
     - cron: 0 10 21 * *
@@ -10,21 +11,14 @@ jobs:
       fail-fast: false
       matrix:
         php:
-          - 7.2
-          - 7.3
-          - 7.4
-          - 8.0
+          - "7.2"
+          - "7.3"
+          - "7.4"
+          - "8.0"
+          - "8.1"
         composer:
           - ""
           - "--prefer-lowest"
-        include:
-          - php: 8.0
-            composer: "--ignore-platform-reqs"
-        exclude:
-          - php: 8.0
-            composer: ""
-          - php: 8.0
-            composer: "--prefer-lowest"
 
     steps:
       - uses: actions/checkout@v1

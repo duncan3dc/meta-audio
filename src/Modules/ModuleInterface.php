@@ -9,7 +9,6 @@ use duncan3dc\MetaAudio\Interfaces\FileInterface;
  */
 interface ModuleInterface
 {
-
     /**
      * Load the passed file.
      *

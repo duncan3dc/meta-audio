@@ -78,7 +78,7 @@ class Test extends TestCase
          * tag. If the ape tag declares its length is something
          * like 999,999,999 then we need to be able to handle it.
          */
-        $ini->set("memory_limit", "1M");
+        $ini->set("memory_limit", "8M");
 
         $result = $ini->call(function () {
             $module = $this->getModule("invalid_item_length");
