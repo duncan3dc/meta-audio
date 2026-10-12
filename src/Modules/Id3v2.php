@@ -160,6 +160,7 @@ class Id3v2 extends AbstractModule
 
         switch ($encoding) {
             case self::HAS_BOM:
+                $value = Bom::removeBom($value);
                 break;
             case self::UTF_16:
                 $value = "\xFE\xFF" . $value;
@@ -167,10 +168,7 @@ class Id3v2 extends AbstractModule
             case self::UTF_8:
                 break;
             default:
-                $value = utf8_encode($value);
         }
-
-        $value = Bom::removeBom($value);
 
         # Strings are unreliably terminated with nulls, so just strip any that are present
         $value = rtrim($value, "\0");

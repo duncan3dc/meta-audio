@@ -70,6 +70,13 @@ class Id3v2Test extends TestCase
         $module = $this->getEncoded();
         assertSame("To Speak, to Listen", $module->getAlbum());
     }
+    public function testWin1251()
+    {
+        $file = new File(__DIR__ . "/../data/cp1251.mp3");
+        $module = new Id3v2();
+        $module->open($file);
+        assertSame("Аквариум", iconv("cp1251", "utf-8", $module->getArtist()));
+    }
     public function testUtf16WithoutBom()
     {
         $module = $this->getEncoded();
