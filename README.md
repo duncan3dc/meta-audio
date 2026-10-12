@@ -7,7 +7,7 @@ Full documentation is available at https://duncan3dc.github.io/meta-audio/
 PHPDoc API documentation is also available at [https://duncan3dc.github.io/meta-audio/api/](https://duncan3dc.github.io/meta-audio/api/namespaces/duncan3dc.MetaAudio.html)  
 
 [![release](https://poser.pugx.org/duncan3dc/meta-audio/version.svg)](https://packagist.org/packages/duncan3dc/meta-audio)
-[![build](https://github.com/duncan3dc/meta-audio/workflows/.github/workflows/buildcheck.yml/badge.svg?branch=master)](https://github.com/duncan3dc/meta-audio/actions?query=branch%3Amaster+workflow%3A.github%2Fworkflows%2Fbuildcheck.yml)
+[![build](https://github.com/duncan3dc/meta-audio/actions/workflows/buildcheck.yaml/badge.svg)](https://github.com/duncan3dc/meta-audio/actions/workflows/buildcheck.yaml?query=branch%3Amain)
 [![coverage](https://codecov.io/gh/duncan3dc/meta-audio/graph/badge.svg)](https://codecov.io/gh/duncan3dc/meta-audio)
 
 
@@ -41,12 +41,5 @@ A [Changelog](CHANGELOG.md) has been available since the beginning of time
 
 ## Where to get help
 Found a bug? Got a question? Just not sure how something works?  
-Please [create an issue](//github.com/duncan3dc/meta-audio/issues) and I'll do my best to help out.  
-Alternatively you can catch me on [Twitter](https://twitter.com/duncan3dc)
-
-
-## duncan3dc/meta-audio for enterprise
-
-Available as part of the Tidelift Subscription
-
-The maintainers of duncan3dc/meta-audio and thousands of other packages are working with Tidelift to deliver commercial support and maintenance for the open source dependencies you use to build your applications. Save time, reduce risk, and improve code health, while paying the maintainers of the exact dependencies you use. [Learn more.](https://tidelift.com/subscription/pkg/packagist-duncan3dc-meta-audio?utm_source=packagist-duncan3dc-meta-audio&utm_medium=referral&utm_campaign=readme)
+Please [create an issue](https://github.com/duncan3dc/meta-audio/issues) and I'll do my best to help out.  
+Alternatively you can connect with me on [LinkedIn](https://linkedin.com/in/duncan3dc)
